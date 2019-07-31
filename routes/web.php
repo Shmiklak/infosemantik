@@ -11,6 +11,17 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', 'HomeController@index')->name('home');
+
+Auth::routes(['register' => false]);
+
+Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>'admin'], function() {
+    Route::get('/', 'AdminController@index')->name('admin.index');
+
+    //Категории
+    Route::resource('/categories', 'CategoriesController');
+    Route::post('/update-categories', 'CategoriesController@updateCategories');
+
+    //Баннеры
+    Route::resource('/banners', 'BannersController');
 });
