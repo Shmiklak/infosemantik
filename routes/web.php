@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/news/{slug}', 'HomeController@newsPage')->name('news-page');
 
 Auth::routes(['register' => false]);
 
@@ -24,4 +25,7 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>'admin'], f
 
     //Баннеры
     Route::resource('/banners', 'BannersController');
+
+    //Ноаости
+    Route::resource('/news', 'NewsController');
 });

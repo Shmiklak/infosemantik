@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Banner;
 use App\Category;
+use App\News;
 use Illuminate\Http\Request;
 use View;
 
@@ -20,9 +21,11 @@ class HomeController extends Controller
             return $query->orderBy('order', 'asc');
         }])->orderBy('order', 'asc')->get();
         $slideshow = Banner::orderBy('created_at', 'desc')->get();
+        $news = News::orderBy('created_at', 'desc')->get();
 
         View::share('categories', $categories);
         View::share('slideshow', $slideshow);
+        View::share('news', $news);
     }
 
     /**
