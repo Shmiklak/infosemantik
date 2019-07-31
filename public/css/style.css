@@ -10930,7 +10930,8 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-origin {
     font-weight: 700;
     margin-bottom: 12px;
     opacity: 0;
-    transition: all 1s .2s
+    transition: all 1s .2s;
+    max-width: 400px;
 }
 
 .block-slideshow__slide-text {
@@ -10939,6 +10940,7 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-origin {
     transform: translateY(15px);
     transition: all .8s .5s;
     margin-bottom: 90px;
+    max-width: 400px;
 }
 
 .block-slideshow__slide-button {

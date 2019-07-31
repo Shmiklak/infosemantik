@@ -24,7 +24,7 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Название для категории</label>
                                 <input type="text" class="form-control" id="title" name="title"
-                                       placeholder="Ноутбуки" value="{{ $category->title }}">
+                                       placeholder="Ноутбуки" value="{{ $category->title }}" required>
                             </div>
                             <div class="form-group">
                                 <label for="image">Изображение категории</label>

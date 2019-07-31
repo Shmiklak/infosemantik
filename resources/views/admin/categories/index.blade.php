@@ -205,7 +205,7 @@
 
             .dd {
                 /*float: left;*/
-                width: 48%;
+                width: 70%;
             }
 
             .dd + .dd {
