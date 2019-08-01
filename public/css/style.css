@@ -11787,3 +11787,22 @@ body.is-admin footer {
         margin-left: -23px;
     }
 }
+
+.post-card__image {
+    height: 235px;
+}
+
+.post-card__image img {
+    height: 100%;
+    object-fit: cover;
+}
+
+.block-posts--layout--list-sm .post-card .post-card__image {
+    height: 153px;
+}
+
+.block-posts--layout--list-sm .post-card .post-card__image img {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+}

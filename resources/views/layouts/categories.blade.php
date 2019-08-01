@@ -7,7 +7,7 @@
                         {{ $category->title }}
                         @if($category->children->count() > 0)
                             <svg class="departments__link-arrow" width="6px" height="9px">
-                                <use xlink:href="images/sprite.svg#arrow-rounded-right-6x9"></use>
+                                <use xlink:href="/images/sprite.svg#arrow-rounded-right-6x9"></use>
                             </svg>
                     </a>
                     <ul class="sub-category">
@@ -27,7 +27,7 @@
 </div>
 <button class="departments__button">
     <svg class="departments__button-icon" width="18px" height="14px">
-        <use xlink:href="images/sprite.svg#menu-18x14"></use>
+        <use xlink:href="/images/sprite.svg#menu-18x14"></use>
     </svg>
     Каталог продукции
 </button>

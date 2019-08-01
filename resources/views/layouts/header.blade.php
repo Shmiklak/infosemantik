@@ -6,7 +6,7 @@
             <div class="mobilemenu__title">Меню</div>
             <button type="button" class="mobilemenu__close">
                 <svg width="20px" height="20px">
-                    <use xlink:href="images/sprite.svg#cross-20"></use>
+                    <use xlink:href="/images/sprite.svg#cross-20"></use>
                 </svg>
             </button>
         </div>
@@ -60,11 +60,11 @@
                     <div class="mobile-header__body">
                         <button class="mobile-header__menu-button">
                             <svg width="18px" height="14px">
-                                <use xlink:href="images/sprite.svg#menu-18x14"></use>
+                                <use xlink:href="/images/sprite.svg#menu-18x14"></use>
                             </svg>
                         </button>
-                        <a class="mobile-header__logo" href="index.html">
-                            <img src="images/head_logo.png">
+                        <a class="mobile-header__logo" href="{{ route('home') }}">
+                            <img src="/images/head_logo.png">
                         </a>
                         <div class="mobile-header__search">
                             <form class="mobile-header__search-form" action="#"><input
@@ -74,13 +74,13 @@
                                 <button class="mobile-header__search-button mobile-header__search-button--submit"
                                         type="submit">
                                     <svg width="20px" height="20px">
-                                        <use xlink:href="images/sprite.svg#search-20"></use>
+                                        <use xlink:href="/images/sprite.svg#search-20"></use>
                                     </svg>
                                 </button>
                                 <button class="mobile-header__search-button mobile-header__search-button--close"
                                         type="button">
                                     <svg width="20px" height="20px">
-                                        <use xlink:href="images/sprite.svg#cross-20"></use>
+                                        <use xlink:href="/images/sprite.svg#cross-20"></use>
                                     </svg>
                                 </button>
                                 <div class="mobile-header__search-body"></div>
@@ -90,7 +90,7 @@
                             <div class="indicator indicator--mobile-search indicator--mobile d-sm-none">
                                 <button class="indicator__button"><span class="indicator__area"><svg width="20px"
                                                                                                      height="20px"><use
-                                                xlink:href="images/sprite.svg#search-20"></use></svg></span></button>
+                                                xlink:href="/images/sprite.svg#search-20"></use></svg></span></button>
                             </div>
                         </div>
                     </div>
@@ -101,8 +101,8 @@
     <header class="site__header d-lg-block d-none">
         <div class="site-header"><!-- .topbar -->
             <div class="site-header__middle container">
-                <div class="site-header__logo"><a href="index.html">
-                        <img src="images/head_logo.png">
+                <div class="site-header__logo"><a href="{{route('home')}}">
+                        <img src="/images/head_logo.png">
                     </a></div>
                 <div class="site-header__search">
                     <div class="search">
@@ -112,7 +112,7 @@
                                                                      autocomplete="off">
                             <button class="search__button" type="submit">
                                 <svg width="20px" height="20px">
-                                    <use xlink:href="images/sprite.svg#search-20"></use>
+                                    <use xlink:href="/images/sprite.svg#search-20"></use>
                                 </svg>
                             </button>
                             <div class="search__border"></div>

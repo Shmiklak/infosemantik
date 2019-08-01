@@ -1,14 +1,7 @@
 @extends('layouts.app')
 @section('content')
-    <div class="block-slideshow block-slideshow--layout--with-departments block">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 d-none d-lg-block"></div>
-                @include('blocks.slideshow')
-            </div>
-        </div>
-    </div><!-- .block-slideshow / end --><!-- .block-features -->
 
+    @include('blocks.slideshow')
     @include('blocks.popular_categories')
 
     <div class="block block-products-carousel" data-layout="grid-4">

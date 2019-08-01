@@ -21,7 +21,7 @@ class HomeController extends Controller
             return $query->orderBy('order', 'asc');
         }])->orderBy('order', 'asc')->get();
         $slideshow = Banner::orderBy('created_at', 'desc')->get();
-        $news = News::orderBy('created_at', 'desc')->get();
+        $news = News::orderBy('created_at', 'desc')->take(4)->get();
 
         View::share('categories', $categories);
         View::share('slideshow', $slideshow);
@@ -36,5 +36,11 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function newsPage($slug) {
+        $single_news = News::where('slug', $slug)->first();
+
+        return view('pages.news_single', compact('single_news'));
     }
 }
