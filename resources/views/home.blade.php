@@ -508,25 +508,5 @@
 
     @include('blocks.news')
     <!-- .block-brands -->
-    <div class="block block-brands">
-        <div class="container">
-            <div class="block-brands__slider">
-                <div class="owl-carousel">
-                    <div class="block-brands__item"><a href="#"><img src="images/vendors/canon.gif" alt=""></a>
-                    </div>
-                    <div class="block-brands__item"><a href="#"><img src="images/vendors/epson_partner_logo.png" alt=""></a>
-                    </div>
-                    <div class="block-brands__item"><a href="#"><img src="images/vendors/fujitsu.jpg"
-                                                                     alt=""></a></div>
-                    <div class="block-brands__item"><a href="#"><img src="images/vendors/hp.jpg" alt=""></a>
-                    </div>
-                    <div class="block-brands__item"><a href="#"><img src="images/vendors/intel.gif" alt=""></a>
-                    </div>
-                    <div class="block-brands__item"><a href="#"><img src="images/vendors/samsung.gif" alt=""></a></div>
-                    <div class="block-brands__item"><a href="#"><img src="images/vendors/lg.gif" alt=""></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('blocks.vendors')
 @endsection

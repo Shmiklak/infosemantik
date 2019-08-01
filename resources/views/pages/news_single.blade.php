@@ -6,17 +6,17 @@
                 <div class="page-header__breadcrumb">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">Home</a>
+                            <li class="breadcrumb-item"><a href="{{ route('home') }}">Главная</a>
                                 <svg class="breadcrumb-arrow" width="6px" height="9px">
                                     <use xlink:href="/images/sprite.svg#arrow-rounded-right-6x9"></use>
                                 </svg>
                             </li>
-                            <li class="breadcrumb-item"><a href="#">Breadcrumb</a>
+                            <li class="breadcrumb-item"><a href="{{ route('news') }}">Новости</a>
                                 <svg class="breadcrumb-arrow" width="6px" height="9px">
                                     <use xlink:href="/images/sprite.svg#arrow-rounded-right-6x9"></use>
                                 </svg>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Post</li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ $single_news->title }}</li>
                         </ol>
                     </nav>
                 </div>
@@ -32,12 +32,12 @@
                                 <div class="post-header__meta-item">{{ strftime(strftime("%e.%m.%Y", strtotime($single_news->created_at))) }}</div>
                             </div>
                         </div>
-                        <div class="post__featured"><a href="#"><img src="/{{ $single_news->image }}" alt=""></a>
+                        <div class="post__featured"><a href=""><img src="/{{ $single_news->image }}" alt="{{ $single_news->title }}"></a>
                         </div>
                         <div class="post__content typography typography--expanded">
                             {!! $single_news->content !!}
                         </div>
-                        <section class="post__section"><h4 class="post__section-title">Другие новости</h4>
+                        <section class="post__section"><h4 class="post__section-title">Последние новости</h4>
                             <div class="related-posts">
                                 <div class="related-posts__list">
                                     @foreach($news as $item)

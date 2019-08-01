@@ -141,7 +141,7 @@
                                             href="about-us.html"><span>О компании</span></a>
                                     </li>
                                     <li class="nav-links__item"><a
-                                            href="about-us.html"><span>Новости</span></a>
+                                            href="{{ route('news') }}"><span>Новости</span></a>
                                     </li>
                                     <li class="nav-links__item"><a
                                             href="about-us.html"><span>Поддержка</span></a>

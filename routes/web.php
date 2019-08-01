@@ -12,7 +12,10 @@
 */
 
 Route::get('/', 'HomeController@index')->name('home');
+
+//Новости
 Route::get('/news/{slug}', 'HomeController@newsPage')->name('news-page');
+Route::get('/news', 'HomeController@news')->name('news');
 
 Auth::routes(['register' => false]);
 
@@ -28,4 +31,7 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>'admin'], f
 
     //Ноаости
     Route::resource('/news', 'NewsController');
+
+    //Вендоры
+    Route::resource('/vendors', 'VendorsController');
 });

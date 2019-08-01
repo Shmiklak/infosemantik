@@ -10,7 +10,7 @@
                         <div class="category-card__body">
                             <div class="category-card__image">
                                 <a href="#">
-                                    <img src="/{{ $category->image}}" alt="">
+                                    <img src="/{{ $category->image}}" alt="{{ $category->title }}">
                                 </a>
                             </div>
                             <div class="category-card__content">

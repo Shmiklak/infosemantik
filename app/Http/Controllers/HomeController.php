@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Banner;
 use App\Category;
 use App\News;
+use App\Vendor;
 use Illuminate\Http\Request;
 use View;
 
@@ -21,10 +22,12 @@ class HomeController extends Controller
             return $query->orderBy('order', 'asc');
         }])->orderBy('order', 'asc')->get();
         $slideshow = Banner::orderBy('created_at', 'desc')->get();
+        $vendors = Vendor::orderBy('created_at', 'desc')->get();
         $news = News::orderBy('created_at', 'desc')->take(4)->get();
 
         View::share('categories', $categories);
         View::share('slideshow', $slideshow);
+        View::share('vendors', $vendors);
         View::share('news', $news);
     }
 
@@ -42,5 +45,10 @@ class HomeController extends Controller
         $single_news = News::where('slug', $slug)->first();
 
         return view('pages.news_single', compact('single_news'));
+    }
+
+    public function news() {
+        $all_news = News::orderBy('created_at', 'desc')->paginate(5);
+        return view('pages.news_listing', compact('all_news'));
     }
 }

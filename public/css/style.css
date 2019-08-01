@@ -2226,20 +2226,20 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-origin {
     order: -1;
     font-size: 15px;
     position: relative;
-    padding-left: 22px
+    /*padding-left: 22px*/
 }
 
-.post-card--layout--list.post-card--size--nl .post-card__date:before {
-    top: 9px;
-    content: "";
-    display: block;
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    border-radius: 2px;
-    background: currentColor;
-    left: 9px
-}
+/*.post-card--layout--list.post-card--size--nl .post-card__date:before {*/
+/*    top: 9px;*/
+/*    content: "";*/
+/*    display: block;*/
+/*    position: absolute;*/
+/*    width: 4px;*/
+/*    height: 4px;*/
+/*    border-radius: 2px;*/
+/*    background: currentColor;*/
+/*    left: 9px*/
+/*}*/
 
 .post-card--layout--list.post-card--size--nl .post-card__name {
     margin-top: 6px;

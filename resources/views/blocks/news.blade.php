@@ -21,7 +21,7 @@
                     <div class="post-card">
                         <div class="post-card__image">
                             <a href="{{ route('news-page', $item->slug) }}">
-                                <img src="/{{ $item->image }}" alt="">
+                                <img src="/{{ $item->image }}" alt="{{ $item->title }}">
                             </a>
                         </div>
                         <div class="post-card__info">
