@@ -37,6 +37,11 @@
                                 <label for="exampleInputEmail1">Содержимое новости</label>
                                 <textarea name="content" id="editor"></textarea>
                             </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="newsletter" checked> Готов к рассылке
+                                </label>
+                            </div>
                         </div>
                         <!-- /.box-body -->
 

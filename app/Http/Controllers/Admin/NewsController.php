@@ -54,6 +54,8 @@ class NewsController extends Controller
 
         $news->save();
 
+        $news->sendEmail($request->get('newsletter'));
+
         return redirect()->route('news.index')->with('message', 'Новость успешно добавлена!');
     }
 

@@ -66,16 +66,16 @@
                                         <div class="form-row">
                                             <div class="form-group col-md-6"><label for="form-name">Ваше имя</label>
                                                 <input type="text" id="form-name" class="form-control"
-                                                       placeholder="Ваше имя"></div>
+                                                       placeholder="Ваше имя" required></div>
                                             <div class="form-group col-md-6"><label for="form-email">Email</label>
                                                 <input type="email" id="form-email" class="form-control"
-                                                       placeholder="Email адрес"></div>
+                                                       placeholder="Email адрес" required></div>
                                         </div>
                                         <div class="form-group"><label for="form-subject">Тема</label> <input
                                                 type="text" id="form-subject" class="form-control"
-                                                placeholder="Тема"></div>
+                                                placeholder="Тема" required></div>
                                         <div class="form-group"><label for="form-message">Сообщение</label> <textarea
-                                                id="form-message" class="form-control" rows="4"></textarea></div>
+                                                id="form-message" class="form-control" rows="4" required></textarea></div>
                                         <button type="button" class="btn btn-primary send-feedback">Отправить</button>
                                         {!! Recaptcha::field('login') !!}
                                     </form>

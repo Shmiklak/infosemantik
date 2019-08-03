@@ -24,6 +24,9 @@ Route::post('/contacts', 'HomeController@feedback')->name('email');
 //Страницы
 Route::get('/page/{slug}', 'HomeController@page')->name('page');
 
+//Подписка на новости
+Route::post('/newsletter', 'HomeController@newsletter')->name('newsletter');
+Route::get('/newsletter/{id}', 'HomeController@subscriptionDelete')->name('subscription.delete');
 
 Auth::routes(['register' => false]);
 

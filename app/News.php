@@ -2,8 +2,10 @@
 
 namespace App;
 
+use App\Mail\Newsletter;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Mail;
 
 class News extends Model
 {
@@ -46,5 +48,21 @@ class News extends Model
 
         $this->save();
         return $this;
+    }
+
+    public function sendEmail($value) {
+        if (!$value == null) {
+            $subscribers = Subscription::get();
+
+            $data = new \stdClass();
+            $data->title = $this->title;
+            $data->slug = $this->slug;
+            $data->image = $this->image;
+
+            foreach ($subscribers as $item) {
+                $data->subscriber = $item->id;
+                Mail::to($item->email)->send(New Newsletter($data));
+            }
+        }
     }
 }

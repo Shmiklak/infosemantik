@@ -6,6 +6,7 @@ use App\Banner;
 use App\Category;
 use App\Mail\Feedback;
 use App\News;
+use App\Subscription;
 use App\Vendor;
 use Hamcrest\Core\Set;
 use Illuminate\Http\Request;
@@ -75,7 +76,7 @@ class HomeController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'email' => 'email',
+            'email' => 'email|required',
             'subject' => 'required',
             'message' => 'required',
             'recaptcha' => 'required|recaptcha:login',
@@ -89,5 +90,21 @@ class HomeController extends Controller
         Mail::to('shmiklak@gmail.com')->send(New Feedback($data));
 
         return response()->json(['success' => 'Ваша сообщение доставлено', 'message' => 'Мы с вами свяжемся.']);
+    }
+
+    public function newsletter(Request $request) {
+        $this->validate($request, [
+            'email' => 'email|required|unique:subscriptions'
+        ]);
+
+        Subscription::create($request->all());
+
+        return response()->json(['success' => 'Вы успешно подписались на рассылку новостей', 'message' => '']);
+    }
+
+    public function subscriptionDelete($id) {
+        Subscription::find($id)->delete();
+
+        return redirect()->route('home')->with('message', 'Ваша подписка на новости отменена');
     }
 }

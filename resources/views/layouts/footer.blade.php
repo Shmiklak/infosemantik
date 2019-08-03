@@ -43,18 +43,8 @@
                         </div>
                     </div>
                     <div class="col-12 col-md-12 col-lg-4">
-                        <div class="site-footer__widget footer-newsletter"><h5 class="footer-newsletter__title">
-                                Подписка на новости</h5>
-                            <form action="#" class="footer-newsletter__form">
-                                <label class="sr-only"
-                                       for="footer-newsletter-address">Email
-                                    Address</label>
-                                <input type="text"
-                                       class="footer-newsletter__form-input form-control"
-                                       id="footer-newsletter-address"
-                                       placeholder="Email">
-                                <button class="footer-newsletter__form-button btn btn-primary">Подписаться</button>
-                            </form>
+                        <div class="site-footer__widget footer-newsletter">
+                            @include('blocks.newsletterform')
                             <div class="footer-newsletter__text footer-newsletter__text--social">Подпишитесь на наш телеграм бот, чтобы получать актуальный прайс лист
                                 <a href="https://t.me/{{ $settings->bot }}" target="_blank" class="telegram-bot-link">{{ '@'.$settings->bot }}</a>
                             </div>

@@ -510,3 +510,10 @@
     <!-- .block-brands -->
     @include('blocks.vendors')
 @endsection
+@push('scripts')
+    @if(session()->has('message'))
+        <script>
+            swal('{{ session()->get('message') }}', '', "success");
+        </script>
+    @endif
+@endpush
