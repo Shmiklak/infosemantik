@@ -4,13 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Banner;
 use App\Category;
+use App\Mail\Feedback;
 use App\News;
 use App\Vendor;
 use Hamcrest\Core\Set;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use View;
 use App\Menu;
 use App\Settings;
+use App\Page;
 
 class HomeController extends Controller
 {
@@ -57,5 +60,34 @@ class HomeController extends Controller
     public function news() {
         $all_news = News::orderBy('created_at', 'desc')->paginate(5);
         return view('pages.news_listing', compact('all_news'));
+    }
+
+    public function page($slug) {
+        $page = Page::where('slug', $slug)->first();
+        return view('pages.basic', compact('page'));
+    }
+
+    public function contactsPage() {
+        return view('pages.contacts');
+    }
+
+    public function feedback(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'email',
+            'subject' => 'required',
+            'message' => 'required',
+            'recaptcha' => 'required|recaptcha:login',
+        ]);
+
+        $data = new \stdClass();
+        $data->name = $request->name;
+        $data->email = $request->email;
+        $data->subject = $request->subject;
+        $data->message = $request->message;
+        Mail::to('shmiklak@gmail.com')->send(New Feedback($data));
+
+        return response()->json(['success' => 'Ваша сообщение доставлено', 'message' => 'Мы с вами свяжемся.']);
     }
 }

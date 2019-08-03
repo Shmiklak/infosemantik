@@ -17,6 +17,14 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/news/{slug}', 'HomeController@newsPage')->name('news-page');
 Route::get('/news', 'HomeController@news')->name('news');
 
+//Контакты
+Route::get('/contacts', 'HomeController@contactsPage')->name('contacts');
+Route::post('/contacts', 'HomeController@feedback')->name('email');
+
+//Страницы
+Route::get('/page/{slug}', 'HomeController@page')->name('page');
+
+
 Auth::routes(['register' => false]);
 
 Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>'admin'], function() {
@@ -42,4 +50,7 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>'admin'], f
     //Настройки
     Route::get('/settings', 'AdminController@settings')->name('admin.settings');
     Route::post('/settings-update', 'AdminController@settingsUpdate')->name('admin.settings_update');
+
+    //Статичные странички
+    Route::resource('/pages', 'PagesController');
 });

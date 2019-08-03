@@ -863,8 +863,8 @@ h6 {
 
 .btn-primary.btn-loading:not(:disabled):not(.disabled), .btn-primary.btn-loading:not(:disabled):not(.disabled).active, .btn-primary.btn-loading:not(:disabled):not(.disabled):active {
     cursor: default;
-    border-color: #36c;
-    background: #36c
+    border-color: #f5080d;
+    background: #f5080d;
 }
 
 .btn-secondary.focus, .btn-secondary:focus, .btn-secondary:hover {
@@ -975,7 +975,7 @@ h6 {
     content: "";
     position: absolute;
     border: 2px solid rgba(0, 0, 0, .1);
-    border-top-color: rgba(0, 0, 0, .5);
+    border-top-color: #FFF;
     transition: border-color .1s;
     animation-name: a;
     animation-duration: .5s;
@@ -11805,4 +11805,18 @@ body.is-admin footer {
     height: 100%;
     object-fit: cover;
     width: 100%;
+}
+
+.grecaptcha-badge {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+.swal-text {
+    text-align: center;
+}
+
+.contact-us__address a {
+    color: inherit;
 }

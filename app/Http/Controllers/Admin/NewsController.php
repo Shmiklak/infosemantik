@@ -129,6 +129,6 @@ class NewsController extends Controller
     public function destroy($id)
     {
         News::find($id)->delete();
-        return redirect()->route('news.index')->with('message', 'Новость успешно удалена!');;
+        return redirect()->route('news.index')->with('message', 'Новость успешно удалена!');
     }
 }

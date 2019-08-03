@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Menu;
+use App\Page;
 
-class MenuController extends Controller
+class PagesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,19 +15,8 @@ class MenuController extends Controller
      */
     public function index()
     {
-        $menu = Menu::orderBy('order', 'asc')->get();
-        return view('admin.menu.index', compact('menu'));
-    }
-
-    public function updateMenu(Request $request)
-    {
-        foreach ($request->categories as $key => $item) {
-            $menu = Menu::find($item['id']);
-            $menu->order = $key;
-            $menu->save();
-        }
-
-        return response()->json(['success' => 'Операция выполнена.', 'message' => 'Порядок меню был обновлен.']);
+        $pages = Page::get();
+        return view('admin.pages.index', compact('pages'));
     }
 
     /**
@@ -37,8 +26,7 @@ class MenuController extends Controller
      */
     public function create()
     {
-        $menu = Menu::orderBy('order', 'asc')->get();
-        return view('admin.menu.create', compact('menu'));
+        return view('admin.pages.create');
     }
 
     /**
@@ -50,13 +38,13 @@ class MenuController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'title' => 'required'
+            'title' => 'required',
+            'content' => 'required'
         ]);
 
-        $menu = Menu::create($request->all());
-        $menu->toggleStatus($request->is_pricelist);
-        $menu->save();
-        return redirect()->route('menu.index')->with('message', 'Пункт успешно добавлен');
+        $page = Page::add($request->all());
+
+        return redirect()->route('pages.index')->with('message', 'Страница успешно добавлена!');
     }
 
     /**
@@ -78,8 +66,8 @@ class MenuController extends Controller
      */
     public function edit($id)
     {
-        $item = Menu::find($id);
-        return view('admin.menu.edit', compact('item'));
+        $page = Page::find($id);
+        return view('admin.pages.edit', compact('page'));
     }
 
     /**
@@ -92,13 +80,13 @@ class MenuController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'title' => 'required'
+            'title' => 'required',
+            'content' => 'required'
         ]);
-        $item = Menu::find($id);
-        $item->fill($request->all());
-        $item->toggleStatus($request->is_pricelist);
-        $item->save();
-        return redirect()->route('menu.index')->with('message', 'Пункт успешно обновлен');
+
+        $page = Page::find($id)->edit($request->all());
+
+        return redirect()->route('pages.index')->with('message', 'Страница успешно обновлена!');
     }
 
     /**
@@ -109,7 +97,7 @@ class MenuController extends Controller
      */
     public function destroy($id)
     {
-        Menu::find($id)->delete();
-        return redirect()->route('menu.index')->with('message', 'Успешно удалено!');
+        Page::find($id)->delete();
+        return redirect()->route('pages.index')->with('message', 'Страница успешно удалена!');
     }
 }

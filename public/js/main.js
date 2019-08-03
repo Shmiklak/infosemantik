@@ -943,4 +943,37 @@
             $("section.loader").fadeOut('fast');
         }, 600);
     });
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $(document).on('click', ".send-feedback", function() {
+        let $this = $(this);
+        $this.addClass('btn-loading');
+
+        $.ajax({
+            type: 'POST',
+            url: '/contacts',
+            data: {
+                name: $("#form-name").val(),
+                email: $("#form-email").val(),
+                subject: $("#form-subject").val(),
+                message: $("#form-message").val(),
+                recaptcha: $(".feedback-form input[name='g-recaptcha-response']").val()
+            },
+            success: function (data) {
+                $('.feedback-form').fadeOut('fast');
+                swal(data.success, data.message, "success");
+            },
+            statusCode: {
+                422: function() {
+                    $this.removeClass('btn-loading');
+                    swal('Что-то пошло не так', 'Проверьте правильность заполнения полей. Если вы уверены в правильности попробуйте обновить страницу.', "error");
+                }
+            }
+        });
+    });
 })(jQuery);

@@ -5,15 +5,26 @@
                 <div class="row">
                     <div class="col-12 col-md-6 col-lg-5">
                         <div class="site-footer__widget footer-contacts"><h5 class="footer-contacts__title">Свяжитесь с нами</h5>
-                            <div class="footer-contacts__text">Значимость этих проблем настолько очевидна, что сложившаяся структура организации позволяет оценить значение модели развития.
-                            </div>
                             <ul class="footer-contacts__contacts">
-                                <li><i class="footer-contacts__icon fas fa-globe-americas"></i> г. Ташкент, Юнусабадский р-н, ул. Ифтихор, 1.
+                                <li><i class="footer-contacts__icon fas fa-globe-americas"></i>
+                                    {{ $settings->address }}
                                 </li>
-                                <li><i class="footer-contacts__icon far fa-envelope"></i> info@infosemantik.uz</li>
-                                <li class="footer-phones"><i class="footer-contacts__icon fas fa-mobile-alt"></i> <a href="tel:+998712346677">+99871 234-66-77</a>, <br>
-                                    <a href="tel:+998712346777">+99871 234-67-77</a>, <br>
-                                    <a href="tel:+998712348877">+99871 234-88-77</a>
+                                <li><i class="footer-contacts__icon far fa-envelope"></i>
+                                    <a href="mailto:{{ $settings->email }}">
+                                        {{ $settings->email }}
+                                    </a>
+                                </li>
+                                <li class="footer-phones"><i class="footer-contacts__icon fas fa-mobile-alt"></i>
+                                    <a
+                                        href="tel:+99871 {{ $settings->phone_1 }}">+(99871) {{ $settings->phone_1 }}</a>
+                                    @if(isset($settings->phone_2))
+                                        <br><a
+                                            href="tel:+99871{{ $settings->phone_2 }}">+(99871) {{ $settings->phone_2 }}</a>
+                                    @endif
+                                    @if(isset($settings->phone_3))
+                                        <br><a
+                                            href="tel:+99871{{ $settings->phone_3 }}">+(99871) {{ $settings->phone_3 }}</a>
+                                    @endif
                                 </li>
                             </ul>
                         </div>
@@ -45,19 +56,19 @@
                                 <button class="footer-newsletter__form-button btn btn-primary">Подписаться</button>
                             </form>
                             <div class="footer-newsletter__text footer-newsletter__text--social">Подпишитесь на наш телеграм бот, чтобы получать актуальный прайс лист
-                                <a href="https::/t.me/infosemantik_bot" target="_blank" class="telegram-bot-link">@InfoSemantik_bot</a>
+                                <a href="https://t.me/{{ $settings->bot }}" target="_blank" class="telegram-bot-link">{{ '@'.$settings->bot }}</a>
                             </div>
                             <div class="footer-newsletter__text footer-newsletter__text--social">Следите за нами в социальных сетях
                             </div>
                             <ul class="footer-newsletter__social-links">
                                 <li class="footer-newsletter__social-link footer-newsletter__social-link--facebook">
-                                    <a href="https://themeforest.net/user/kos9" target="_blank"><i
+                                    <a href="{{ $settings->facebook }}" target="_blank"><i
                                             class="fab fa-facebook-f"></i></a></li>
                                 <li class="footer-newsletter__social-link footer-newsletter__social-link--instagram">
-                                    <a href="https://themeforest.net/user/kos9" target="_blank"><i
+                                    <a href="{{ $settings->instagram }}" target="_blank"><i
                                             class="fab fa-instagram"></i></a></li>
                                 <li class="footer-newsletter__social-link footer-newsletter__social-link--telegram">
-                                    <a href="https://themeforest.net/user/kos9" target="_blank"><i
+                                    <a href="{{ $settings->telegram }}" target="_blank"><i
                                             class="fab fa-telegram"></i></a></li>
                             </ul>
                         </div>
