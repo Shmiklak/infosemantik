@@ -34,4 +34,12 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>'admin'], f
 
     //Вендоры
     Route::resource('/vendors', 'VendorsController');
+
+    //Меню
+    Route::resource('/menu', 'MenuController');
+    Route::post('/update-menu', 'MenuController@updateMenu');
+
+    //Настройки
+    Route::get('/settings', 'AdminController@settings')->name('admin.settings');
+    Route::post('/settings-update', 'AdminController@settingsUpdate')->name('admin.settings_update');
 });

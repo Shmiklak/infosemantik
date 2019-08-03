@@ -22,18 +22,12 @@
                         <div class="site-footer__widget footer-links"><h5 class="footer-links__title">
                                 Меню</h5>
                             <ul class="footer-links__list">
-                                <li class="footer-links__item"><a href="#" class="footer-links__link">О компании</a>
-                                </li>
-                                <li class="footer-links__item"><a href="#" class="footer-links__link">Новости</a></li>
-                                <li class="footer-links__item"><a href="#" class="footer-links__link">Поддержка</a></li>
-                                <li class="footer-links__item"><a href="#" class="footer-links__link">Полезное</a>
-                                </li>
-                                <li class="footer-links__item"><a href="#" class="footer-links__link">Гарантия</a>
-                                </li>
-                                <li class="footer-links__item"><a href="#" class="footer-links__link">Контакты</a>
-                                </li>
-                                <li class="footer-links__item"><a href="#" class="footer-links__link">Прайс лист</a>
-                                </li>
+                                @foreach($menu as $item)
+                                    <li class="footer-links__item"><a
+                                            @if($item->is_pricelist == 1) href="/{{ $settings->price_list }}"
+                                            download @else href="/{{$item->link }} @endif" class="footer-links__link">{{ $item->title }}</a>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>

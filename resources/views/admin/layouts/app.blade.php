@@ -46,6 +46,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         <!-- Header Navbar -->
         <nav class="navbar navbar-static-top" role="navigation">
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="{{ route('admin.settings') }}"><i class="fa fa-gears"></i></a>
+                    </li>
+                </ul>
+            </div>
         </nav>
     </header>
     <!-- Left side column. contains the logo and sidebar -->

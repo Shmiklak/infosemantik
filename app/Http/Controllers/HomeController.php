@@ -6,8 +6,11 @@ use App\Banner;
 use App\Category;
 use App\News;
 use App\Vendor;
+use Hamcrest\Core\Set;
 use Illuminate\Http\Request;
 use View;
+use App\Menu;
+use App\Settings;
 
 class HomeController extends Controller
 {
@@ -24,11 +27,15 @@ class HomeController extends Controller
         $slideshow = Banner::orderBy('created_at', 'desc')->get();
         $vendors = Vendor::orderBy('created_at', 'desc')->get();
         $news = News::orderBy('created_at', 'desc')->take(4)->get();
+        $menu = Menu::orderBy('order', 'asc')->get();
+        $settings = Settings::find(1);
 
         View::share('categories', $categories);
         View::share('slideshow', $slideshow);
         View::share('vendors', $vendors);
         View::share('news', $news);
+        View::share('menu', $menu);
+        View::share('settings', $settings);
     }
 
     /**
