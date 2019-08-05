@@ -31,7 +31,9 @@ Route::get('/newsletter/{id}', 'HomeController@subscriptionDelete')->name('subsc
 //Ошибка 404
 Route::get('/404', 'HomeController@error404')->name('404');
 
-Auth::routes(['register' => false]);
+Route::get('/login',  'HomeController@loginForm')->name('login');
+Route::post('/login',  'HomeController@login');
+Route::get('/logout', 'HomeController@logout')->name('logout');
 
 Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>'admin'], function() {
     Route::get('/', 'AdminController@index')->name('admin.index');

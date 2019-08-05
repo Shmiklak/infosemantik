@@ -10,6 +10,7 @@ use App\Subscription;
 use App\Vendor;
 use Hamcrest\Core\Set;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use View;
 use App\Menu;
@@ -122,5 +123,31 @@ class HomeController extends Controller
 
     public function error404() {
         return view('errors.404');
+    }
+
+    public function logout()
+    {
+        auth()->logout();
+        return redirect('/');
+    }
+
+    public function loginForm() {
+        return view('admin.login');
+    }
+
+    public function login(Request $request) {
+        $this->validate($request, [
+            'email'=>'required|email',
+            'password'=>'required',
+        ]);
+        if(Auth::attempt([
+            'email'=>$request->email,
+            'password'=>$request->password
+        ])) {
+            return redirect()->route('admin.index');
+        }
+        else {
+            return redirect()->back()->with('message', 'Неверный логин или пароль!');
+        }
     }
 }
