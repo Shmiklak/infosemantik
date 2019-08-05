@@ -975,7 +975,8 @@
                 email: $("#form-email").val(),
                 subject: $("#form-subject").val(),
                 message: $("#form-message").val(),
-                recaptcha: $(".feedback-form input[name='g-recaptcha-response']").val()
+                captcha: $("#form-captcha").val(),
+                captcha_key: $("#form-captcha-key").val(),
             },
             success: function (data) {
                 $('.feedback-form').fadeOut('fast');

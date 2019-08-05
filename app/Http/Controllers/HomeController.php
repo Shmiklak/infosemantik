@@ -15,6 +15,8 @@ use View;
 use App\Menu;
 use App\Settings;
 use App\Page;
+use Illuminate\Validation\Rule;
+use App\Rules\Captcha;
 
 class HomeController extends Controller
 {
@@ -25,7 +27,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $categories = Category::where('parent_id', null)->with(['children' => function ($query){
+        $categories = Category::where('parent_id', null)->with(['children' => function ($query) {
             return $query->orderBy('order', 'asc');
         }])->orderBy('order', 'asc')->get();
         $slideshow = Banner::orderBy('created_at', 'desc')->get();
@@ -52,23 +54,27 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function newsPage($slug) {
+    public function newsPage($slug)
+    {
         $single_news = News::where('slug', $slug)->first();
 
         return view('pages.news_single', compact('single_news'));
     }
 
-    public function news() {
+    public function news()
+    {
         $all_news = News::orderBy('created_at', 'desc')->paginate(5);
         return view('pages.news_listing', compact('all_news'));
     }
 
-    public function page($slug) {
+    public function page($slug)
+    {
         $page = Page::where('slug', $slug)->first();
         return view('pages.basic', compact('page'));
     }
 
-    public function contactsPage() {
+    public function contactsPage()
+    {
         return view('pages.contacts');
     }
 
@@ -79,7 +85,11 @@ class HomeController extends Controller
             'email' => 'email|required',
             'subject' => 'required',
             'message' => 'required',
-            'recaptcha' => 'required|recaptcha:login',
+            'captcha_key' => 'required',
+            'captcha' => [
+                'required',
+                new Captcha($request->captcha_key)
+            ],
         ]);
 
         $data = new \stdClass();
@@ -92,7 +102,8 @@ class HomeController extends Controller
         return response()->json(['success' => 'Ваша сообщение доставлено', 'message' => 'Мы с вами свяжемся.']);
     }
 
-    public function newsletter(Request $request) {
+    public function newsletter(Request $request)
+    {
         $this->validate($request, [
             'email' => 'email|required|unique:subscriptions'
         ]);
@@ -102,7 +113,8 @@ class HomeController extends Controller
         return response()->json(['success' => 'Вы успешно подписались на рассылку новостей', 'message' => '']);
     }
 
-    public function subscriptionDelete($id) {
+    public function subscriptionDelete($id)
+    {
         Subscription::find($id)->delete();
 
         return redirect()->route('home')->with('message', 'Ваша подписка на новости отменена');

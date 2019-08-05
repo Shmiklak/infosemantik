@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-    {!! Recaptcha::renderJs() !!}
     <div class="site__body">
         <div class="page-header">
             <div class="page-header__container container">
@@ -76,8 +75,19 @@
                                                 placeholder="Тема" required></div>
                                         <div class="form-group"><label for="form-message">Сообщение</label> <textarea
                                                 id="form-message" class="form-control" rows="4" required></textarea></div>
+                                        @php
+                                            $a = rand(1, 10);
+                                            $b = rand(1, 10);
+
+                                            $answer = base64_encode($a + $b);
+                                        @endphp
+                                        <div class="form-group"><label for="form-captcha">Введите ответ на этот пример {{ $a.' + '.$b.' = ' }}</label>
+                                            <input type="number"  class="form-control" id="form-captcha" name="captcha" placeholder="Ответ" required>
+
+                                        </div>
+                                        <input type="hidden" value="{{ $answer }}" name="captcha_key" id="form-captcha-key">
+
                                         <button type="button" class="btn btn-primary send-feedback">Отправить</button>
-                                        {!! Recaptcha::field('login') !!}
                                     </form>
                                 </div>
                             </div>
