@@ -5875,7 +5875,8 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-origin {
 }
 
 .not-found {
-    text-align: center
+    text-align: center;
+    padding: 50px 0;
 }
 
 .not-found__404 {
