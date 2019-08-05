@@ -28,6 +28,9 @@ Route::get('/page/{slug}', 'HomeController@page')->name('page');
 Route::post('/newsletter', 'HomeController@newsletter')->name('newsletter');
 Route::get('/newsletter/{id}', 'HomeController@subscriptionDelete')->name('subscription.delete');
 
+//Ошибка 404
+Route::get('/404', 'HomeController@error404')->name('404');
+
 Auth::routes(['register' => false]);
 
 Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>'admin'], function() {

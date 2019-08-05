@@ -119,4 +119,8 @@ class HomeController extends Controller
 
         return redirect()->route('home')->with('message', 'Ваша подписка на новости отменена');
     }
+
+    public function error404() {
+        return view('errors.404');
+    }
 }
