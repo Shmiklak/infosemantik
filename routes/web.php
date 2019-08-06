@@ -61,4 +61,13 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>'admin'], f
 
     //Статичные странички
     Route::resource('/pages', 'PagesController');
+
+    //Атрибуты продуктов
+    Route::group(['prefix'=>'attributes'], function() {
+        Route::get('/', 'AttributesController@index')->name('attributes.index');
+        Route::get('/load', 'AttributesController@data')->name('attributes.data');
+        Route::post('/store', 'AttributesController@store')->name('attributes.store');
+        Route::put('/update', 'AttributesController@update')->name('attributes.update');
+        Route::delete('/delete', 'AttributesController@destroy')->name('attributes.delete');
+    });
 });

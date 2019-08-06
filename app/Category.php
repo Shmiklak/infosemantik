@@ -52,4 +52,8 @@ class Category extends Model
             $this->save();
         }
     }
+
+    public function attributes() {
+        return $this->hasMany(Attribute::class);
+    }
 }

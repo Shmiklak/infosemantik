@@ -6,6 +6,7 @@
         <li ><a href="{{ route('vendors.index') }}"><i class="fa fa-circle"></i><span>Вендоры</span></a></li>
         <li class="header">Контент</li>
         <li ><a href="{{ route('categories.index') }}"><i class="fa fa-circle"></i><span>Категории</span></a></li>
+        <li ><a href="{{ route('attributes.index') }}"><i class="fa fa-circle"></i><span>Атрибуты</span></a></li>
         <li ><a href="{{ route('news.index') }}"><i class="fa fa-circle"></i><span>Новости</span></a></li>
         <li class="header">Управление элементами сайта</li>
         <li ><a href="{{ route('pages.index') }}"><i class="fa fa-circle"></i><span>Статичные страницы</span></a></li>

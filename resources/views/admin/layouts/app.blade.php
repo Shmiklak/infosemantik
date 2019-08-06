@@ -17,6 +17,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Ionicons -->
     <link rel="stylesheet" href="/css/admin/vendor/Ionicons/css/ionicons.min.css">
     <!-- Theme style -->
+    @stack('styles')
     <link rel="stylesheet" href="/css/admin/AdminLTE.min.css">
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
           page. However, you can choose any other skin. Make sure you
@@ -28,7 +29,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
     <link rel="stylesheet" href="/css/admin/custom.css">
-    @stack('styles')
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
