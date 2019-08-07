@@ -70,4 +70,15 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>'admin'], f
         Route::put('/update', 'AttributesController@update')->name('attributes.update');
         Route::delete('/delete', 'AttributesController@destroy')->name('attributes.delete');
     });
+
+    //Продукты
+    Route::group(['prefix'=>'products'], function() {
+       Route::get('/', 'ProductsController@index')->name('products.index');
+       Route::get('/create', 'ProductsController@create')->name('products.create');
+       Route::get('/get-attributes', 'ProductsController@getAttributes')->name('products.get_attributes');
+       Route::delete('/delete', 'ProductsController@destroy')->name('products.destroy');
+       Route::post('/store', 'ProductsController@store')->name('products.store');
+       Route::get('/load', 'ProductsController@loadProducts')->name('products.data');
+       Route::get('/{id}/edit', 'ProductsController@edit')->name('products.edit');
+    });
 });

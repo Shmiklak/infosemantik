@@ -50,8 +50,6 @@ class AttributesController extends Controller
                 "categories"=>$attribute->categories()->pluck('category_id')
             ];
         }
-
-//        dd($data);
         return response()->json($data);
     }
 
@@ -84,6 +82,6 @@ class AttributesController extends Controller
     public function destroy(Request $request)
     {
         Attribute::find($request->id)->remove();
-        return response()->json(['success' => 'Операция выполнена.', 'message' => 'Атрибут был изменен.']);
+        return response()->json(['success' => 'Операция выполнена.', 'message' => 'Атрибут был удален.']);
     }
 }
