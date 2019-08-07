@@ -36,6 +36,12 @@ class Product extends Model
         return $product;
     }
 
+    public function edit($fields) {
+        $this->fill($fields);
+        $this->save();
+        return $this;
+    }
+
     public function removeImage() {
         if ($this->main_image != null) {
             unlink($this->main_image);
@@ -74,11 +80,17 @@ class Product extends Model
 
     public function setAttributes($value, $field) {
         $attr = substr($field, 10);
+        DB::table('product_attributes')->where('product_id', $this->id)->where('attribute_id', $attr)->delete();
         DB::table('product_attributes')->insert([
             'product_id' => $this->id,
             'attribute_id' => $attr,
             'value' =>$value,
         ]);
+    }
+
+    public function loadAttributes() {
+        $id = $this->id;
+        return DB::table('product_attributes')->where('product_id', $id)->get();
     }
 
     public function uploadExtraimages($image, $field) {

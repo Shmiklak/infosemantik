@@ -40,6 +40,20 @@ class ProductsController extends Controller
         return response()->json($attributes);
     }
 
+    public function getAttributesValues(Request $request) {
+        $product = Product::find($request->id);
+        $attributes = $product->loadAttributes();
+
+        foreach ($attributes as $key => $attribute) {
+            $data[$key] = [
+                "field"=>"attribute-".$attribute->attribute_id,
+                "value"=>$attribute->value,
+            ];
+        }
+
+        return response()->json($data);
+    }
+
     public function store(Request $request) {
         $this->validate($request, [
             'title'=>'required',
@@ -71,12 +85,48 @@ class ProductsController extends Controller
             }
         }
 
-        return redirect()->route('products.index')-with('message', 'Продукт успешно добавлен');
+        return redirect()->route('products.index')->with('message', 'Продукт успешно добавлен');
     }
 
     public function edit($id) {
         $product = Product::find($id);
-        return view('admin.products.edit')->withProduct($product);
+        $categories = Category::doesntHave('children')->get();
+        return view('admin.products.edit')->withProduct($product)->withCategories($categories);
+    }
+
+    public function update(Request $request, $id) {
+        $this->validate($request, [
+            'title'=>'required',
+            'description'=>'required',
+            'category_id'=>'required'
+        ]);
+
+        $product = Product::find($id);
+        $product->edit($request->all());
+        $product->slug = $request->get('slug');
+        $product->save();
+        $product->uploadImage($request->file('main_image'));
+        $product->setAvailable($request->get('is_available'));
+        $product->setRecommended($request->get('is_recommended'));
+        $product->setBestseller($request->get('is_bestseller'));
+
+        foreach ($request->all() as $key => $attr) {
+            if(!is_array($attr)) {
+                if (strpos($key, 'image_') !== false) {
+                    $product->uploadExtraimages($request->file($key), $key);
+                }
+            }
+        }
+
+        foreach ($request->all() as $key => $attr) {
+            if(!is_array($attr)) {
+                if (strpos($key, 'attribute') !== false) {
+                    $product->setAttributes($request->get($key), $key);
+                }
+            }
+        }
+
+        return redirect()->route('products.index')->with('message', 'Продукт успешно изменен');
     }
 
 

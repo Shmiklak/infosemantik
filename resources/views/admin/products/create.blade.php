@@ -41,35 +41,42 @@
                                         <img id="image-preview" style="display:none"/>
                                     </div>
                                     <div class="form-group">
-                                        <p class="help-block">Вы можете добавить до пяти других изображений этого продукта.</p>
+                                        <p class="help-block">Вы можете добавить до пяти других изображений этого
+                                            продукта.</p>
                                         <label>Изображения продукта</label>
                                         <input type="file" id="image_1" name="image_1" class="has-preview"
-                                               data-preview="#image-preview1" accept="image/*" style="margin-bottom: 1em">
+                                               data-preview="#image-preview1" accept="image/*"
+                                               style="margin-bottom: 1em">
                                         <div class="upload-preview">
                                             <img id="image-preview1" style="display:none; margin-bottom: 1em;"/>
                                         </div>
                                         <input type="file" id="image_2" name="image_2" class="has-preview"
-                                               data-preview="#image-preview2" accept="image/*" style="margin-bottom: 1em">
+                                               data-preview="#image-preview2" accept="image/*"
+                                               style="margin-bottom: 1em">
                                         <div class="upload-preview">
                                             <img id="image-preview2" style="display:none; margin-bottom: 1em;"/>
                                         </div>
                                         <input type="file" id="image_3" name="image_3" class="has-preview"
-                                               data-preview="#image-preview3" accept="image/*" style="margin-bottom: 1em">
+                                               data-preview="#image-preview3" accept="image/*"
+                                               style="margin-bottom: 1em">
                                         <div class="upload-preview">
                                             <img id="image-preview3" style="display:none; margin-bottom: 1em;"/>
                                         </div>
                                         <input type="file" id="image_4" name="image_4" class="has-preview"
-                                               data-preview="#image-preview4" accept="image/*" style="margin-bottom: 1em">
+                                               data-preview="#image-preview4" accept="image/*"
+                                               style="margin-bottom: 1em">
                                         <div class="upload-preview">
                                             <img id="image-preview4" style="display:none; margin-bottom: 1em;"/>
                                         </div>
                                         <input type="file" id="image_5" name="image_5" class="has-preview"
-                                               data-preview="#image-preview5" accept="image/*" style="margin-bottom: 1em">
+                                               data-preview="#image-preview5" accept="image/*"
+                                               style="margin-bottom: 1em">
                                         <div class="upload-preview">
                                             <img id="image-preview5" style="display:none; margin-bottom: 1em;"/>
                                         </div>
                                         <input type="file" id="image_6" name="image_6" class="has-preview"
-                                               data-preview="#image-preview6" accept="image/*" style="margin-bottom: 1em">
+                                               data-preview="#image-preview6" accept="image/*"
+                                               style="margin-bottom: 1em">
                                         <div class="upload-preview">
                                             <img id="image-preview6" style="display:none; margin-bottom: 1em;"/>
                                         </div>
@@ -80,7 +87,7 @@
                                     </div>
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" name="is_available" checked> В наличии
+                                            <input type="checkbox" name="is_available"> В наличии
                                         </label>
                                     </div>
                                     <div class="checkbox">
@@ -149,14 +156,12 @@
                 success: function (data) {
                     let html = '';
                     for (let i in data) {
-                        console.log(i, data[i]);
                         if (data[i].has_ckeditor == 1) {
                             html += '<div class="form-group">' +
                                 '<label for="title">' + data[i].title + '</label>' +
                                 '<textarea class="ckeditor" id="attribute-' + data[i].id + '" name="attribute-' + data[i].id + '"></textarea>' +
                                 '</div>'
-                        }
-                        else {
+                        } else {
                             html += '<div class="form-group">' +
                                 '<label for="title">' + data[i].title + '</label>' +
                                 '<input type="text" class="form-control" id="attribute-' + data[i].id + '" name="attribute-' + data[i].id + '">' +
@@ -165,11 +170,11 @@
 
                     }
                     $('.attributes-box').html(html);
-                    $('.attributes-box .ckeditor').each(function() {
-                       let element = $(this).attr('id');
-                       CKEDITOR.replace(element, {
-                           customConfig: '/js/admin/attributes.js?v=1.2'
-                       });
+                    $('.attributes-box .ckeditor').each(function () {
+                        let element = $(this).attr('id');
+                        CKEDITOR.replace(element, {
+                            customConfig: '/js/admin/attributes.js?v=1.2'
+                        });
                     });
                 },
                 error: function () {

@@ -17,3 +17,7 @@ td .btn-group {
     align-items: center;
     font-size: 20px;
 }
+
+img[src="/"] {
+    display: none;
+}
