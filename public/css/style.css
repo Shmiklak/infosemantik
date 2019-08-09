@@ -9871,7 +9871,8 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-origin {
     display: -ms-flexbox;
     display: flex;
     width: calc(33.3333% - 12px);
-    margin: 6px
+    margin: 6px;
+    max-height: 333px;
 }
 
 .block-products__list-item .product-card {
@@ -10061,7 +10062,8 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-origin {
     }
 
     .block-products__featured + .block-products__list {
-        margin-left: 6px
+        margin-left: 6px;
+        width: 100%;
     }
 
     .block-products__list + .block-products__featured {

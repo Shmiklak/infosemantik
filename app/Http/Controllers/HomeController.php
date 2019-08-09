@@ -55,7 +55,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $bestsellers = Product::where('is_bestseller', 1)->orderBy('created_at', 'asc')->get()->paginate(7);
+        $recommended = Product::where('is_recommended', 1)->orderBy('created_at', 'asc')->get()->paginate(12);
+        return view('home')->withBestsellers($bestsellers)->withRecommended($recommended);
     }
 
     public function newsPage($slug)
