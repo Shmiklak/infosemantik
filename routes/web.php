@@ -35,6 +35,14 @@ Route::get('/login',  'HomeController@loginForm')->name('login');
 Route::post('/login',  'HomeController@login');
 Route::get('/logout', 'HomeController@logout')->name('logout');
 
+//Продукты
+Route::get('/products/{slug}', 'HomeController@product')->name('product');
+Route::get('/categories/{slug}', 'HomeController@category')->name('category');
+Route::post('/categories', 'HomeController@sortCatalog')->name('catalog.sort');
+
+Route::get('search', 'HomeController@search')->name('search');
+
+
 Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>'admin'], function() {
     Route::get('/', 'AdminController@index')->name('admin.index');
 

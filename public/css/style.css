@@ -2244,7 +2244,8 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-origin {
 .post-card--layout--list.post-card--size--nl .post-card__name {
     margin-top: 6px;
     font-size: 18px;
-    line-height: 24px
+    line-height: 24px;
+    width: 100%;
 }
 
 .post-card--layout--list.post-card--size--nl .post-card__content {
@@ -3473,7 +3474,7 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-origin {
 
 .filter-categories__item--parent {
     position: relative;
-    padding-left: 14px
+    /*padding-left: 14px*/
 }
 
 .filter-categories__item--current {
@@ -7460,7 +7461,18 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-origin {
 }
 
 .products-list[data-layout=grid-3-sidebar] .product-card .product-card__buttons .btn.btn-svg-icon {
-    width: calc(1.875rem + 2px)
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+}
+
+.products-list[data-layout=grid-3-sidebar] .product-card .product-card__buttons .btn.btn-svg-icon svg {
+    transform: none;
+    position: static;
+    margin-right: 5px;
+    margin-top: -2px;
 }
 
 @media (hover: hover) {
@@ -10574,7 +10586,18 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-origin {
 }
 
 .block-products-carousel[data-layout=grid-5] .product-card .product-card__buttons .btn.btn-svg-icon {
-    width: calc(1.5rem + 2px)
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+}
+
+.block-products-carousel[data-layout=grid-5] .product-card .product-card__buttons .btn.btn-svg-icon svg {
+    transform: none;
+    position: static;
+    margin-right: 5px;
+    margin-top: -2px;
 }
 
 @media (hover: hover) {
@@ -11820,4 +11843,22 @@ body.is-admin footer {
 
 .contact-us__address a {
     color: inherit;
+}
+
+.widget-filters {
+    padding-bottom: 0;
+    border-bottom: 0;
+}
+
+img.product-gallery__carousel-image {
+    height: 70px;
+    object-fit: contain;
+}
+
+.view-options__control {
+    margin-left: auto;
+}
+
+.block-products-carousel__slider .product-card .product-card__actions .product-card__availability {
+    font-size: 14px;
 }

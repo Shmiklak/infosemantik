@@ -36,7 +36,7 @@
                                                     </div>
                                                     <div class="post-card__date">{{ strftime(strftime("%e.%m.%Y", strtotime($item->created_at))) }}</div>
                                                     <div class="post-card__content">
-                                                        {!! $item->shortDescription() !!}
+                                                        {!! strip_tags($item->shortDescription()) !!}
                                                     </div>
                                                     <div class="post-card__read-more"><a href="{{ route('news-page', $item->slug) }}"
                                                                                          class="btn btn-secondary btn-sm">Подробнее</a></div>

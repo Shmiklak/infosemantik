@@ -3,7 +3,7 @@
         <ul class="departments__links">
             @foreach($categories as $category)
                 <li class="departments__item @if($category->children->count() > 0) has-child @endif">
-                    <a href="#">
+                    <a href="{{ route('category', $category->slug) }}">
                         {{ $category->title }}
                         @if($category->children->count() > 0)
                             <svg class="departments__link-arrow" width="6px" height="9px">
@@ -13,7 +13,7 @@
                     <ul class="sub-category">
                         @foreach($category->children as $child)
                             <li>
-                                <a href="#">{{ $child->title }}</a>
+                                <a href="{{ route('category', $child->slug) }}">{{ $child->title }}</a>
                             </li>
                         @endforeach
                     </ul>

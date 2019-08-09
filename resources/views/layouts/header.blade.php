@@ -42,10 +42,11 @@
                             <img src="/{{ $settings->logo }}">
                         </a>
                         <div class="mobile-header__search">
-                            <form class="mobile-header__search-form" action="#"><input
+                            <form class="mobile-header__search-form" action="{{ route('search') }}" method="GET"><input
                                     class="mobile-header__search-input" name="search"
                                     placeholder="Поиск по сайту" aria-label="Site search" type="text"
-                                    autocomplete="off">
+                                    autocomplete="off" @if(isset($serchQuery)) value="{{ $searchQuery }}" @endif>
+                                @csrf
                                 <button class="mobile-header__search-button mobile-header__search-button--submit"
                                         type="submit">
                                     <svg width="20px" height="20px">
@@ -81,10 +82,11 @@
                     </a></div>
                 <div class="site-header__search">
                     <div class="search">
-                        <form class="search__form" action="#"><input class="search__input" name="search"
+                        <form class="search__form" action="{{ route('search') }}" method="GET"><input class="search__input" name="search"
                                                                      placeholder="Поиск по сайту"
                                                                      aria-label="Site search" type="text"
-                                                                     autocomplete="off">
+                                                                     autocomplete="off" @if(isset($serchQuery)) value="{{ $searchQuery }}" @endif>
+                            @csrf
                             <button class="search__button" type="submit">
                                 <svg width="20px" height="20px">
                                     <use xlink:href="/images/sprite.svg#search-20"></use>

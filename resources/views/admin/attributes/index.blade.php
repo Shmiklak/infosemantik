@@ -280,8 +280,15 @@
             });
 
             $(document).on('click', '.btn-update', function () {
-                let categories = $(this).data('categories').split(','),
-                    title = $(this).data('title'),
+                let str = $(this).data('categories');
+                let categories;
+                if (str.toString().indexOf(',') > -1) {
+                    categories = $(this).data('categories').split(',');
+                }
+                else {
+                    categories = str;
+                }
+                let title = $(this).data('title'),
                     ckeditor = $(this).data('ck'),
                     id = $(this).data('id');
 

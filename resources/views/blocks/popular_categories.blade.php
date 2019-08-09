@@ -9,12 +9,12 @@
                     <div class="block-categories__item category-card category-card--layout--classic">
                         <div class="category-card__body">
                             <div class="category-card__image">
-                                <a href="#">
+                                <a href="{{ route('category', $category->slug) }}">
                                     <img src="/{{ $category->image}}" alt="{{ $category->title }}">
                                 </a>
                             </div>
                             <div class="category-card__content">
-                                <div class="category-card__name"><a href="#">{{ $category->title }}</a></div>
+                                <div class="category-card__name"><a href="{{ route('category', $category->slug) }}">{{ $category->title }}</a></div>
                             </div>
                         </div>
                     </div>

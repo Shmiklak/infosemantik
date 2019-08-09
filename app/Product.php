@@ -75,10 +75,14 @@ class Product extends Model
         $this->removeExtraimage('image_4');
         $this->removeExtraimage('image_5');
         $this->removeExtraimage('image_6');
+        DB::table('product_attributes')->where('product_id', $this->id)->delete();
         $this->delete();
     }
 
     public function setAttributes($value, $field) {
+        if(empty($value)) {
+            return;
+        }
         $attr = substr($field, 10);
         DB::table('product_attributes')->where('product_id', $this->id)->where('attribute_id', $attr)->delete();
         DB::table('product_attributes')->insert([
@@ -91,6 +95,10 @@ class Product extends Model
     public function loadAttributes() {
         $id = $this->id;
         return DB::table('product_attributes')->where('product_id', $id)->get();
+    }
+
+    public function getAttributeName($id) {
+        return Attribute::find($id)->title;
     }
 
     public function uploadExtraimages($image, $field) {
@@ -134,5 +142,17 @@ class Product extends Model
             $this->is_bestseller = 1;
             $this->save();
         }
+    }
+
+    public function shortDescription() {
+        $text = substr($this->description, 0, 200 + 1);
+
+        if($last_space = strrpos($text, ' ')) {
+            $text = substr($text, 0, $last_space);
+            $text = rtrim($text);
+            $text .=  "...";
+        }
+
+        return $text;
     }
 }

@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Attribute;
 use App\Banner;
 use App\Category;
 use App\Mail\Feedback;
 use App\News;
+use App\Product;
 use App\Subscription;
 use App\Vendor;
 use Hamcrest\Core\Set;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use View;
 use App\Menu;
@@ -149,5 +152,88 @@ class HomeController extends Controller
         else {
             return redirect()->back()->with('message', 'Неверный логин или пароль!');
         }
+    }
+
+    public function product($slug) {
+        $product = Product::where('slug', $slug)->first();
+        $attributes = $product->loadAttributes();
+        return view('products.single')->withProduct($product)->withAttributes($attributes);
+    }
+
+    public function sortCatalog(Request $request) {
+        $request->session()->put('sort', $request->sort);
+        return redirect()->back();
+    }
+
+    public function category(Request $request, $slug) {
+        if ($request->session()->get('sort') != null) {
+            $sort = $request->session()->get('sort');
+        } else {
+            $sort = 1;
+        }
+
+        $ids = [];
+        $categories = Category::where('slug', $slug)->first()->children;
+        foreach ($categories as $category){
+            array_push($ids, $category->id);
+        }
+        $category = Category::where('slug', $slug)->first();
+        array_push($ids, $category->id);
+        if ($sort == 1) {
+            $products = Product::whereIn('category_id', $ids)->orderBy('created_at', 'desc')->paginate(10);
+        }
+        if ($sort == 2) {
+            $products = Product::whereIn('category_id', $ids)->orderBy('created_at', 'asc')->paginate(10);
+        }
+        if ($sort == 3) {
+            $products = Product::whereIn('category_id', $ids)->orderBy('title', 'asc')->paginate(10);
+        }
+        if ($sort == 4) {
+            $products = Product::whereIn('category_id', $ids)->orderBy('title', 'desc')->paginate(10);
+        }
+        return view('catalog.index')->withCategory($category)->withProducts($products)->withSort($sort);
+    }
+
+    public function search(Request $request) {
+        $search = $request->search;
+        $attributes = DB::table('product_attributes')->where('value', 'like', '%' . $search . '%')->get();
+
+        $ids = [];
+
+        foreach ($attributes as $attribute){
+            array_push($ids, $attribute->product_id);
+        }
+
+        $products = Product::whereIn('id', $ids)->orWhere('title', 'like', '%' . $search . '%')->orWhere('description', 'like', '%' . $search . '%')->orderBy('created_at', 'desc')->get();
+        $news = News::where('title', 'like', '%' . $search . '%')
+            ->orWhere('content', 'like', '%' . $search . '%')
+            ->orderBy('created_at')->get();
+
+        $results = [];
+        foreach($products as $item) {
+            $results[] = [
+                "image"=>$item->main_image,
+                "title"=>$item->title,
+                "description"=>$item->shortDescription(),
+                "type"=>"product",
+                "slug"=>$item->slug,
+                "created_at"=>$item->created_at
+                ];
+        }
+        foreach($news as $item) {
+            $results[] = [
+                "image"=>$item->image,
+                "title"=>$item->title,
+                "description"=>$item->shortDescription(),
+                "type"=>"news",
+                "slug"=>$item->slug,
+                "created_at"=>$item->created_at
+            ];
+        }
+
+        $paginatedResults = collect($results)->paginate(8);
+
+        View::share('searchQuery', $search);
+        return view('search')->withResults($paginatedResults);
     }
 }

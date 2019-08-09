@@ -659,7 +659,7 @@
         const carousel = gallery.find('.product-gallery__carousel .owl-carousel');
 
         image
-            .owlCarousel({items: 1, dots: false, rtl: isRTL()})
+            .owlCarousel({items: 1, dots: false, rtl: isRTL(), autoHeight:true})
             .on('changed.owl.carousel', syncPosition);
 
         carousel

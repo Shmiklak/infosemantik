@@ -26,6 +26,10 @@ class Category extends Model
         return $this->hasMany('App\Category', 'parent_id', 'id')->orderBy('order', 'asc');
     }
 
+    public function getParent() {
+        return $this->hasOne('App\Category', 'id', 'parent_id');
+    }
+
     public static function add($fields) {
         $category = new static;
         $category->fill($fields);
