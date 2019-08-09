@@ -38,7 +38,7 @@
                                             page/{{ $item->slug }}
                                         </td>
                                         <td>
-                                            {!! $item->shortDescription() !!}
+                                            {!! strip_tags($item->shortDescription()) !!}
                                         </td>
                                         <td>
                                             {{ strftime(strftime("%e.%m.%Y", strtotime($item->created_at))) }}

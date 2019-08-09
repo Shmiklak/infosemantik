@@ -49,6 +49,30 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <nav class="navbar navbar-static-top" role="navigation">
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="/images/avatars/admin.jpg" class="user-image" alt="User Image">
+                            <span class="hidden-xs">{{ auth()->user()->name }}</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- User image -->
+                            <li class="user-header">
+                                <img src="/images/avatars/admin.jpg" class="img-circle" alt="User Image">
+
+                                <p>
+                                    {{ auth()->user()->name }}
+                                </p>
+                            </li>
+                            <li class="user-footer">
+                                <div class="pull-left">
+                                    <a data-toggle="modal" data-target="#change-password" class="btn btn-default btn-flat">Изменить пароль</a>
+                                </div>
+                                <div class="pull-right">
+                                    <a href="{{ route('logout') }}" class="btn btn-default btn-flat">Выйти</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
                     <li>
                         <a href="{{ route('admin.settings') }}"><i class="fa fa-gears"></i></a>
                     </li>
@@ -56,41 +80,53 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div>
         </nav>
     </header>
-    <!-- Left side column. contains the logo and sidebar -->
     <aside class="main-sidebar">
-
-        <!-- sidebar: style can be found in sidebar.less -->
         @include('admin.layouts.menu')
-        <!-- /.sidebar -->
     </aside>
-
-    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         @yield('content')
-
     </div>
     <footer class="main-footer">
         <strong><a href="https://datasite.uz" target="_blank">DataSite Technology</a></strong>
     </footer>
     <div class="control-sidebar-bg"></div>
 </div>
-<!-- ./wrapper -->
 
-<!-- REQUIRED JS SCRIPTS -->
+<div id="change-password" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form class="change-password">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Изменить пароль</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Пароль</label>
+                        <input class="form-control" type="password" name="password" id="newpassword">
+                    </div>
+                    <div class="form-group">
+                        <label>Повторите пароль</label>
+                        <input class="form-control" type="password" name="repeatpassword" id="repeatpassword">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary update-password pull-left">
+                        Обновить
+                    </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                </div>
+            </form>
+        </div>
 
-<!-- jQuery 3 -->
+    </div>
+</div>
 <script src="/js/admin/vendor/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
 <script src="/js/admin/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- AdminLTE App -->
 <script src="/js/sweetalert.min.js"></script>
 <script src="/js/admin/adminlte.min.js"></script>
 <script src="/js/admin/custom.js"></script>
-
 @stack('scripts')
 
-<!-- Optionally, you can add Slimscroll and FastClick plugins.
-     Both of these plugins are recommended to enhance the
-     user experience. -->
 </body>
 </html>

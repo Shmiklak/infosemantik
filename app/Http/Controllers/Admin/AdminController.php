@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Settings;
 use View;
+use App\User;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -73,5 +75,16 @@ class AdminController extends Controller
 
         $settings->save();
         return redirect()->route('admin.settings')->with('message', 'Настройки успешно обновлены.');
+    }
+
+    public function password(Request $request) {
+        $this->validate($request, [
+            'password'=>'required'
+        ]);
+        $user = User::where('email', 'info@dst.uz')->first();
+        $user->password = Hash::make($request->get('password'));
+        $user->save();
+
+        return response()->json(['success' => 'Пароль изменен.', 'message' => 'Используйте его для входа в профиль в следующий раз.']);
     }
 }

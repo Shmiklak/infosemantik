@@ -91,4 +91,8 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>'admin'], f
        Route::get('/{id}/edit', 'ProductsController@edit')->name('products.edit');
        Route::put('/{id}/update', 'ProductsController@update')->name('products.update');
     });
+
+
+    //Сменить пароль
+    Route::post('/change-password', 'AdminController@password')->name('admin.password');
 });

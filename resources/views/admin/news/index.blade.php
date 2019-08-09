@@ -35,7 +35,7 @@
                                             {{ $item->title }}
                                         </td>
                                         <td>
-                                            {!! $item->shortDescription() !!}
+                                            {!! strip_tags($item->shortDescription()) !!}
                                         </td>
                                         <td>
                                             <img src="/{{ $item->image }}" style="width: 300px">
