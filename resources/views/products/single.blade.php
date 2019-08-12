@@ -173,7 +173,8 @@
                                 <div class="spec__section">
                                     @foreach($attributes as $attribute)
                                         <div class="spec__row">
-                                            <div class="spec__name">{{ $product->getAttributeName($attribute->attribute_id) }}</div>
+                                            <div
+                                                class="spec__name">{{ $product->getAttributeName($attribute->attribute_id) }}</div>
                                             <div class="spec__value">{!! $attribute->value !!}</div>
                                         </div>
                                     @endforeach
@@ -205,50 +206,58 @@
                     <div class="block-products-carousel__preloader"></div>
                     <div class="owl-carousel">
                         @foreach ($product->category->products as $item)
-                            <div class="block-products-carousel__column">
-                            <div class="block-products-carousel__cell">
-                                <div class="product-card">
-                                    <div class="product-card__badges-list">
-                                        @if(strtotime($item->created_at) > strtotime('1 week ago'))
-                                            <div class="product-card__badge product-card__badge--new">Новинка</div>
-                                        @endif
-                                    </div>
-                                    <div class="product-card__image"><a
-                                            href="{{ route('product', $item->slug) }}"><img
-                                                src="/{{ $item->main_image }}" alt=""></a>
-                                    </div>
-                                    <div class="product-card__info">
-                                        <div class="product-card__name">
-                                            <a href="{{ route('product', $item->slug) }}">
-                                                {{ $item->title }}
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product-card__actions">
-                                        <div class="product-card__availability">Наличие:
-                                            @if($item->is_available == 1)
-                                                <span class="text-success">В наличии</span>
-                                            @endif
-                                            @if($item->is_available == 0)
-                                                <span class="text-danger">Нет в наличии</span>
-                                            @endif
-                                        </div>
-                                        <div class="product-card__buttons">
-                                            <button
-                                                class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__compare"
-                                                type="button">
-                                                <svg width="16px" height="16px">
-                                                    <use xlink:href="/images/sprite.svg#compare-16"></use>
-                                                </svg>
-                                                <span
-                                                    class="fake-svg-icon fake-svg-icon--compare-16"></span>
-                                                Сравнить
-                                            </button>
+                            @if ($item->id != $product->id)
+                                <div class="block-products-carousel__column">
+                                    <div class="block-products-carousel__cell">
+                                        <div class="product-card">
+                                            <div class="product-card__badges-list">
+                                                @if(strtotime($item->created_at) > strtotime('1 week ago'))
+                                                    <div class="product-card__badge product-card__badge--new">Новинка
+                                                    </div>
+                                                @endif
+                                                @if($item->is_bestseller == 1)
+                                                    <div class="product-card__badge product-card__badge--new">
+                                                        Бестселлер
+                                                    </div>
+                                                @endif
+                                            </div>
+                                            <div class="product-card__image"><a
+                                                    href="{{ route('product', $item->slug) }}"><img
+                                                        src="/{{ $item->main_image }}" alt=""></a>
+                                            </div>
+                                            <div class="product-card__info">
+                                                <div class="product-card__name">
+                                                    <a href="{{ route('product', $item->slug) }}">
+                                                        {{ $item->title }}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="product-card__actions">
+                                                <div class="product-card__availability">Наличие:
+                                                    @if($item->is_available == 1)
+                                                        <span class="text-success">В наличии</span>
+                                                    @endif
+                                                    @if($item->is_available == 0)
+                                                        <span class="text-danger">Нет в наличии</span>
+                                                    @endif
+                                                </div>
+                                                <div class="product-card__buttons">
+                                                    <button
+                                                        class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__compare"
+                                                        type="button">
+                                                        <svg width="16px" height="16px">
+                                                            <use xlink:href="/images/sprite.svg#compare-16"></use>
+                                                        </svg>
+                                                        <span
+                                                            class="fake-svg-icon fake-svg-icon--compare-16"></span>
+                                                        Сравнить
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            @endif
                         @endforeach
                     </div>
                 </div>

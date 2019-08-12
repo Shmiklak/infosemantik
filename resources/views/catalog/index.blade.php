@@ -110,6 +110,11 @@
                                                                 Новинка
                                                             </div>
                                                         @endif
+                                                            @if($product->is_bestseller == 1)
+                                                                <div class="product-card__badge product-card__badge--new">
+                                                                    Бестселлер
+                                                                </div>
+                                                            @endif
                                                     </div>
                                                     <div class="product-card__image"><a
                                                             href="{{ route('product', $product->slug) }}"><img
