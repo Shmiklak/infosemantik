@@ -16,13 +16,56 @@
                 @foreach($menu as $item)
                     <li class="mobile-links__item">
                         <div class="mobile-links__item-title">
-                        <a @if($item->is_pricelist == 1) href="/{{ $settings->price_list }}"
-                           download @else href="/{{$item->link }} @endif" class="mobile-links__item-link">
-                            {{ $item->title }}
-                        </a>
+                            <a @if($item->is_pricelist == 1) href="/{{ $settings->price_list }}"
+                               download @else href="/{{$item->link }} @endif" class="mobile-links__item-link">
+                                {{ $item->title }}
+                            </a>
                         </div>
                     </li>
                 @endforeach
+                <li class="mobile-links__item" data-collapse-item>
+                    <div class="mobile-links__item-title"><a href="#" class="mobile-links__item-link">Категории</a>
+                        <button class="mobile-links__item-toggle" type="button" data-collapse-trigger>
+                            <svg class="mobile-links__item-arrow" width="12px" height="7px">
+                                <use xlink:href="/images/sprite.svg#arrow-rounded-down-12x7"></use>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="mobile-links__item-sub-links" data-collapse-content>
+                        <ul class="mobile-links mobile-links--level--1">
+                            @foreach($categories as $category)
+                                <li class="mobile-links__item" data-collapse-item>
+                                    <div class="mobile-links__item-title">
+                                        <a href="{{ route('category', $category->slug) }}"
+                                           class="mobile-links__item-link">{{ $category->title }}</a>
+                                        @if($category->children->count() > 0)
+                                            <button class="mobile-links__item-toggle" type="button"
+                                                    data-collapse-trigger>
+                                                <svg class="mobile-links__item-arrow" width="12px" height="7px">
+                                                    <use xlink:href="/images/sprite.svg#arrow-rounded-down-12x7"></use>
+                                                </svg>
+                                            </button>
+                                        @endif
+                                    </div>
+                                    @if($category->children->count() > 0)
+                                        <div class="mobile-links__item-sub-links" data-collapse-content>
+                                            <ul class="mobile-links mobile-links--level--2">
+                                                @foreach($category->children as $child)
+                                                    <li class="mobile-links__item" data-collapse-item>
+                                                        <div class="mobile-links__item-title">
+                                                            <a href="{{ route('category', $child->slug) }}"
+                                                               class="mobile-links__item-link">{{ $child->title }}</a>
+                                                        </div>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>
@@ -82,10 +125,11 @@
                     </a></div>
                 <div class="site-header__search">
                     <div class="search">
-                        <form class="search__form" action="{{ route('search') }}" method="GET"><input class="search__input" name="search"
-                                                                     placeholder="Поиск по сайту"
-                                                                     aria-label="Site search" type="text"
-                                                                     autocomplete="off" @if(isset($serchQuery)) value="{{ $searchQuery }}" @endif>
+                        <form class="search__form" action="{{ route('search') }}" method="GET"><input
+                                class="search__input" name="search"
+                                placeholder="Поиск по сайту"
+                                aria-label="Site search" type="text"
+                                autocomplete="off" @if(isset($serchQuery)) value="{{ $searchQuery }}" @endif>
                             @csrf
                             <button class="search__button" type="submit">
                                 <svg width="20px" height="20px">

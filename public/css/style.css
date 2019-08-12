@@ -3623,7 +3623,7 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-origin {
     position: absolute;
     background: #fff;
     box-shadow: 0 0px 0 2px #f5080d;
-    border-radius: 2px;
+    border-radius: 0;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -6590,7 +6590,7 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-origin {
 
 @media (min-width: 400px) and (max-width: 479px) {
     .category-card--layout--classic .category-card__image {
-        width: 40%
+        width: 80px
     }
 }
 
@@ -10180,7 +10180,8 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-origin {
 
 @media (max-width: 767px) {
     .block-products__list-item {
-        width: calc(50% - 12px)
+        width: calc(50% - 12px);
+        max-height: unset;
     }
 }
 
