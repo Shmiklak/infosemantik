@@ -1011,4 +1011,26 @@
             }
         });
     });
+
+    $(document).on('click', '.product-card__compare', function() {
+        let $this = $(this);
+        $this.addClass('btn-loading');
+
+        $.ajax({
+            type: 'POST',
+            url: '/compare',
+            data: {
+                id: $this.data('id'),
+            },
+            success: function (data) {
+                $this.removeClass('btn-loading');
+                swal(data.title, data.message, data.type);
+                $(".comparison-indicator .indicator__value").text(data.count);
+            },
+            error: function () {
+                $this.removeClass('btn-loading');
+                swal('Что-то пошло не так', 'Попробуйте еще раз позже.', "error");
+            }
+        });
+    });
 })(jQuery);

@@ -177,7 +177,7 @@
     </script>
     @if(session()->has('message'))
         <script>
-            swal('{{ session()->get('message') }}', 'Вы можете отредактировать порядок категорий', "success");
+            swal('{{ session()->get('message') }}', '', "success");
         </script>
     @endif
 @endpush

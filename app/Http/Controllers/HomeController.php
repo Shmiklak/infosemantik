@@ -126,7 +126,8 @@ class HomeController extends Controller
         return redirect()->route('home')->with('message', 'Ваша подписка на новости отменена');
     }
 
-    public function error404() {
+    public function error404()
+    {
         return view('errors.404');
     }
 
@@ -136,38 +137,42 @@ class HomeController extends Controller
         return redirect('/');
     }
 
-    public function loginForm() {
+    public function loginForm()
+    {
         return view('admin.login');
     }
 
-    public function login(Request $request) {
+    public function login(Request $request)
+    {
         $this->validate($request, [
-            'email'=>'required|email',
-            'password'=>'required',
+            'email' => 'required|email',
+            'password' => 'required',
         ]);
-        if(Auth::attempt([
-            'email'=>$request->email,
-            'password'=>$request->password
+        if (Auth::attempt([
+            'email' => $request->email,
+            'password' => $request->password
         ])) {
             return redirect()->route('admin.index');
-        }
-        else {
+        } else {
             return redirect()->back()->with('message', 'Неверный логин или пароль!');
         }
     }
 
-    public function product($slug) {
+    public function product($slug)
+    {
         $product = Product::where('slug', $slug)->first();
         $attributes = $product->loadAttributes();
         return view('products.single')->withProduct($product)->withAttributes($attributes);
     }
 
-    public function sortCatalog(Request $request) {
+    public function sortCatalog(Request $request)
+    {
         $request->session()->put('sort', $request->sort);
         return redirect()->back();
     }
 
-    public function category(Request $request, $slug) {
+    public function category(Request $request, $slug)
+    {
         if ($request->session()->get('sort') != null) {
             $sort = $request->session()->get('sort');
         } else {
@@ -176,7 +181,7 @@ class HomeController extends Controller
 
         $ids = [];
         $categories = Category::where('slug', $slug)->first()->children;
-        foreach ($categories as $category){
+        foreach ($categories as $category) {
             array_push($ids, $category->id);
         }
         $category = Category::where('slug', $slug)->first();
@@ -196,13 +201,14 @@ class HomeController extends Controller
         return view('catalog.index')->withCategory($category)->withProducts($products)->withSort($sort);
     }
 
-    public function search(Request $request) {
+    public function search(Request $request)
+    {
         $search = $request->search;
         $attributes = DB::table('product_attributes')->where('value', 'like', '%' . $search . '%')->get();
 
         $ids = [];
 
-        foreach ($attributes as $attribute){
+        foreach ($attributes as $attribute) {
             array_push($ids, $attribute->product_id);
         }
 
@@ -212,24 +218,24 @@ class HomeController extends Controller
             ->orderBy('created_at')->get();
 
         $results = [];
-        foreach($products as $item) {
+        foreach ($products as $item) {
             $results[] = [
-                "image"=>$item->main_image,
-                "title"=>$item->title,
-                "description"=>$item->shortDescription(),
-                "type"=>"product",
-                "slug"=>$item->slug,
-                "created_at"=>$item->created_at
-                ];
+                "image" => $item->main_image,
+                "title" => $item->title,
+                "description" => $item->shortDescription(),
+                "type" => "product",
+                "slug" => $item->slug,
+                "created_at" => $item->created_at
+            ];
         }
-        foreach($news as $item) {
+        foreach ($news as $item) {
             $results[] = [
-                "image"=>$item->image,
-                "title"=>$item->title,
-                "description"=>$item->shortDescription(),
-                "type"=>"news",
-                "slug"=>$item->slug,
-                "created_at"=>$item->created_at
+                "image" => $item->image,
+                "title" => $item->title,
+                "description" => $item->shortDescription(),
+                "type" => "news",
+                "slug" => $item->slug,
+                "created_at" => $item->created_at
             ];
         }
 
@@ -237,5 +243,74 @@ class HomeController extends Controller
 
         View::share('searchQuery', $search);
         return view('search')->withResults($paginatedResults);
+    }
+
+    public function addToComparison(Request $request)
+    {
+        $product = Product::find($request->id);
+        $currentComparison = request()->session()->get('comparison');
+
+        if (isset($currentComparison)) {
+
+            foreach ($currentComparison as $key => $item) {
+                if ($item->id == $product->id) {
+                    return response()->json(['title' => 'Вы не можете добавить один продукт дважды.', 'message' => '', 'type' => 'error']);
+                }
+                if ($item->category_id != $product->category_id) {
+                    return response()->json(['title' => 'Вы не можете добавить продукты из разных категорий.', 'message' => '', 'type' => 'error']);
+                }
+            }
+
+
+            if (count($currentComparison) == 3) {
+                return response()->json(['title' => 'Вы не можете сравнить более трёх продуктов', 'message' => 'Удалите некоторые продукты из списка сравнения, чтобы добавить новые', 'type' => 'error']);
+            }
+        }
+
+        $request->session()->push('comparison', $product);
+        $count = count(request()->session()->get('comparison'));
+
+        return response()->json(['title' => 'Продукт успешно добавлен в список сравнения', 'message' => '', 'type' => 'success', 'count' => $count]);
+    }
+
+    public function compare()
+    {
+        $products = request()->session()->get('comparison');
+
+        if ($products == null) {
+            return view('catalog.comparison_empty');
+        }
+
+        $attributesList = $products[0]->loadAttributes();
+
+        $attributesNames = [];
+
+        foreach ($attributesList as $key => $attribute) {
+            $attributesNames[] = [
+                "title" => $products[0]->getAttributeName($attribute->attribute_id),
+                "id" => $attribute->attribute_id
+            ];
+        }
+
+        return view('catalog.comparison')->withProducts($products)->withAttributesNames($attributesNames);
+    }
+
+    public function removeFromComparison(Request $request)
+    {
+        $products = request()->session()->get('comparison');
+
+        if (count($products) > 1) {
+            foreach ($products as $key => $product) {
+                if ($product->id == $request->id) {
+                    unset($products[$key]);
+                    request()->session()->put('comparison', $products);
+                    return redirect()->back();
+                }
+            }
+        }
+        else {
+            request()->session()->forget('comparison');
+            return redirect()->back();
+        }
     }
 }

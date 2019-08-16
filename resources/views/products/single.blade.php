@@ -144,8 +144,8 @@
                             <form class="product__options">
                                 <div class="form-group product__option">
                                     <div class="product__actions-item product__actions-item--compare">
-                                        <button type="button" class="btn btn-secondary btn-svg-icon btn-lg"
-                                                data-toggle="tooltip" title="Сравнить">
+                                        <button type="button" class="btn btn-secondary btn-svg-icon btn-lg product-card__compare"
+                                                data-toggle="tooltip" title="Сравнить" data-id="{{ $product->id }}">
                                             <svg width="16px" height="16px">
                                                 <use xlink:href="/images/sprite.svg#compare-16"></use>
                                             </svg>
@@ -244,7 +244,7 @@
                                                 <div class="product-card__buttons">
                                                     <button
                                                         class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__compare"
-                                                        type="button">
+                                                        type="button" data-id="{{ $item->id }}">
                                                         <svg width="16px" height="16px">
                                                             <use xlink:href="/images/sprite.svg#compare-16"></use>
                                                         </svg>

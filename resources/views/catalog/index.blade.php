@@ -139,7 +139,7 @@
                                                         <div class="product-card__buttons">
                                                             <button
                                                                 class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__compare"
-                                                                type="button">
+                                                                type="button" data-id="{{ $product->id }}">
                                                                 <svg width="16px" height="16px">
                                                                     <use
                                                                         xlink:href="/images/sprite.svg#compare-16"></use>

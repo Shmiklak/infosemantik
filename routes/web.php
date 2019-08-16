@@ -43,6 +43,12 @@ Route::post('/categories', 'HomeController@sortCatalog')->name('catalog.sort');
 Route::get('search', 'HomeController@search')->name('search');
 
 
+//Роуты сравнения
+Route::post('/compare', 'HomeController@addToComparison')->name('add-to-comparison');
+Route::get('/compare', 'HomeController@compare')->name('compare');
+Route::post('/compare-remove', 'HomeController@removeFromComparison')->name('compare-remove');
+
+
 Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>'admin'], function() {
     Route::get('/', 'AdminController@index')->name('admin.index');
 

@@ -5092,14 +5092,15 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-origin {
 }
 
 .site-header__middle {
-    height: 104px
+    height: 124px;
 }
 
 .site-header__logo, .site-header__middle {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-align: center;
-    align-items: center
+    align-items: center;
+    padding-bottom: 10px;
 }
 
 .site-header__logo {
@@ -11864,4 +11865,8 @@ img.product-gallery__carousel-image {
 
 .block-products-carousel__slider .product-card .product-card__actions .product-card__availability {
     font-size: 14px;
+}
+
+.site__body .page-header+.block {
+    min-height: 180px;
 }

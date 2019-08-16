@@ -176,6 +176,23 @@
                                     @endforeach
                                 </ul>
                             </div><!-- .nav-links / end -->
+                            <div class="nav-panel__indicators comparison-indicator">
+                                <div class="indicator">
+                                    <a href="{{ route('compare') }}" class="indicator__button">
+                                        <span class="indicator__area"><svg width="20px" height="20px">
+                                                <use xlink:href="/images/sprite.svg#compare-16"></use>
+                                            </svg>
+                                            <span class="indicator__value">
+                                                @if (Session::get('comparison') != null)
+                                                    {{ count(Session::get('comparison')) }}
+                                                @else
+                                                    0
+                                                @endif
+                                            </span>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

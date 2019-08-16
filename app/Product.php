@@ -101,6 +101,17 @@ class Product extends Model
         return Attribute::find($id)->title;
     }
 
+    public function getValueOfAttribute($attr, $product)
+    {
+        $value = DB::table('product_attributes')->where('attribute_id', $attr)->where('product_id', $product)->first();
+
+        if (isset($value)) {
+            return $value->value;
+        }
+
+        return '-';
+    }
+
     public function uploadExtraimages($image, $field) {
         if ($image==null) {
             return;
