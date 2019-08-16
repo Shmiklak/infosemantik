@@ -12,6 +12,10 @@
                 <div class="box">
                     <div class="box-header">
                         <h3 class="box-title">Продукты</h3>
+                        <div class="btn-group pull-right">
+                        <a href="{{ route('products.excel') }}" class="btn btn-success"><i class="fa fa-table"></i></a>
+                        <a href="#" class="btn btn-info" data-toggle="modal" data-target="#importModal"><i class="fa fa-upload"></i></a>
+                        </div>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
@@ -50,6 +54,28 @@
                     <div style="margin-top: 10px; display: flex; justify-content:center;">
                         <button type="button" class="btn btn-primary delete-product pull-left" style="margin-right: 10px;">
                             Удалить
+                        </button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+    <div id="importModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content" style="padding: 15px;">
+                <form class="import-form" method="POST" action="{{ route('products.import') }}" enctype="multipart/form-data">
+                    @csrf
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" style="text-align: center">
+                        Загрузить файл</h4>
+                    <div style="padding: 15px; display: flex; justify-content: center;">
+                    <input type="file" name="excel" id="excel">
+                    </div>
+                    <div style="margin-top: 10px; display: flex; justify-content:center;">
+                        <button type="submit" class="btn btn-primary pull-left" style="margin-right: 10px;">
+                            Загрузить
                         </button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
                     </div>

@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Attribute;
 use App\Category;
+use App\Exports\ProductsExport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Product;
+use App\Imports\ProductsImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductsController extends Controller
 {
@@ -133,5 +136,15 @@ class ProductsController extends Controller
     public function destroy(Request $request) {
         Product::find($request->id)->remove();
         return response()->json(['success' => 'Операция выполнена.', 'message' => 'Продукт был удален.']);
+    }
+
+    public function export() {
+        return Excel::download(new ProductsExport, 'products.xlsx');
+    }
+
+    public function import(Request $request)
+    {
+        Excel::import(new ProductsImport, request()->file('excel'));
+        return redirect()->route('products.index')->with('message', 'База данных продуктов успешно обновлена');
     }
 }

@@ -90,6 +90,8 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>'admin'], f
        Route::get('/load', 'ProductsController@loadProducts')->name('products.data');
        Route::get('/{id}/edit', 'ProductsController@edit')->name('products.edit');
        Route::put('/{id}/update', 'ProductsController@update')->name('products.update');
+       Route::get('/export', 'ProductsController@export')->name('products.excel');
+       Route::post('/import', 'ProductsController@import')->name('products.import');
     });
 
 
