@@ -21,13 +21,11 @@
                     </div>
                     <div class="form-group">
                         <label for="description">Описание страницы</label>
-                        <input type="text" class="form-control" id="description" name="description"
-                               value="{{ App\getPageDescription(request()->path()) }}">
+                        <textarea class="form-control" id="description" name="description">{{ App\getPageDescription(request()->path()) }}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="keywords">Ключевые слова</label>
-                        <input type="text" class="form-control" id="keywords" name="keywords"
-                               value="{{ App\getPageKeywords(request()->path()) }}">
+                        <textarea class="form-control" id="keywords" name="keywords">{{ App\getPageKeywords(request()->path()) }}</textarea>
                     </div>
                     <input type="hidden" name="path" value="{{ request()->path() }}">
                 </div>

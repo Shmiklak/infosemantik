@@ -13,7 +13,7 @@ class CreateSEOSTable extends Migration
      */
     public function up()
     {
-        Schema::create('s_e_o_s', function (Blueprint $table) {
+        Schema::create('seo', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('path');
             $table->string('site_name')->nullable();
