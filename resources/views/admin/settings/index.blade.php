@@ -76,6 +76,18 @@
                         <div class="upload-preview">
                             <img id="image-preview" style="display:inline-block" src="/{{ $settings->logo }}"/>
                         </div>
+                        <div class="form-group">
+                            <p class="help-block">Мета настройки сайта</p>
+                            <label for="site_name">Заголовок сайта</label>
+                            <input type="text" class="form-control" id="site_name" name="site_name"
+                                   value="{{ $settings->site_name }}">
+                            <label for="description">Описание сайта</label>
+                            <input type="text" class="form-control" id="description" name="description"
+                                   value="{{ $settings->description }}">
+                            <label for="keywords">Ключевые слова</label>
+                            <input type="text" class="form-control" id="keywords" name="keywords"
+                                   value="{{ $settings->keywords }}">
+                        </div>
                     </div>
                     <div class="box-footer">
                         <button type="submit" class="btn btn-primary">Обновить</button>

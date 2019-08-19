@@ -11938,3 +11938,16 @@ img.product-gallery__carousel-image {
 .no-products {
     padding: 0 5px;
 }
+
+button.seo-button {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    background: #f5080d;
+    color: #FFF;
+    font-weight: bold;
+    border: none;
+    padding: 4px 15px;
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.29);
+    cursor: pointer;
+}

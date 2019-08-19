@@ -48,6 +48,7 @@ Route::post('/compare', 'HomeController@addToComparison')->name('add-to-comparis
 Route::get('/compare', 'HomeController@compare')->name('compare');
 Route::post('/compare-remove', 'HomeController@removeFromComparison')->name('compare-remove');
 
+Route::post('/seo', 'SEOController@update')->name('seo.update')->middleware('admin');
 
 Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>'admin'], function() {
     Route::get('/', 'AdminController@index')->name('admin.index');
