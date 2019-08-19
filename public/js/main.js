@@ -350,6 +350,7 @@
                 nav: false,
                 dots: false,
                 loop: true,
+                autoHeight:true,
                 rtl: isRTL()
             };
             const layoutOptions = {
@@ -928,7 +929,7 @@
     });
 
     $(function () {
-        $('li.departments__item.has-child svg').on('click', function (e) {
+        $('li.departments__item.has-child .toggle-subcategories').on('click', function (e) {
             e.preventDefault();
             var $menu = $(this).parent().parent().find('.sub-category'),
                 $button = $(this);
@@ -939,7 +940,7 @@
                 }
             });
 
-            $('li.departments__item.has-child svg').each(function () {
+            $('li.departments__item.has-child .toggle-subcategories').each(function () {
                 if (!$(this).is($button)) {
                     $(this).removeClass('active');
                 }

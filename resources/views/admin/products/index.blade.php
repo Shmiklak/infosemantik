@@ -12,6 +12,7 @@
                 <div class="box">
                     <div class="box-header">
                         <h3 class="box-title">Продукты</h3>
+                        <a style="margin-left: 15px;" class="btn btn-primary" href="{{ route('products.create') }}">Добавить продукт</a>
                         <div class="btn-group pull-right">
                         <a href="{{ route('products.excel') }}" class="btn btn-success"><i class="fa fa-table"></i></a>
                         <a href="#" class="btn btn-info" data-toggle="modal" data-target="#importModal"><i class="fa fa-upload"></i></a>
@@ -34,7 +35,7 @@
                     </div>
 
                     <div class="box-footer">
-                        <a class="btn btn-primary" href="{{ route('products.create') }}">Добавить продукт</a>
+
                     </div>
                     <!-- /.box-body -->
                 </div>

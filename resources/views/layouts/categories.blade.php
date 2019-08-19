@@ -6,9 +6,11 @@
                     <a href="{{ route('category', $category->slug) }}">
                         {{ $category->title }}
                         @if($category->children->count() > 0)
-                            <svg class="departments__link-arrow" width="6px" height="9px">
-                                <use xlink:href="/images/sprite.svg#arrow-rounded-right-6x9"></use>
-                            </svg>
+                            <button class="toggle-subcategories">
+                                <svg class="departments__link-arrow" width="6px" height="9px">
+                                    <use xlink:href="/images/sprite.svg#arrow-rounded-right-6x9"></use>
+                                </svg>
+                            </button>
                     </a>
                     <ul class="sub-category">
                         @foreach($category->children as $child)

@@ -222,7 +222,7 @@ class HomeController extends Controller
             $results[] = [
                 "image" => $item->main_image,
                 "title" => $item->title,
-                "description" => $item->shortDescription(),
+                "description" => $item->short_description,
                 "type" => "product",
                 "slug" => $item->slug,
                 "created_at" => $item->created_at

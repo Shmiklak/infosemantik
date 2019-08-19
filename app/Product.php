@@ -12,7 +12,7 @@ class Product extends Model
 {
     Use Sluggable;
 
-    protected $fillable = ['title', 'description', 'category_id'];
+    protected $fillable = ['title', 'description', 'short_description','category_id'];
 
     public function sluggable()
     {

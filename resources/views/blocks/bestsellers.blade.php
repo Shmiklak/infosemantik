@@ -42,7 +42,7 @@
             @endforeach
             <div class="block-products__list">
                 @foreach($bestsellers as $key=>$product)
-                    @if($key=!0)
+                    @if($key!=0)
                         <div class="block-products__list-item">
                             <div class="product-card">
 

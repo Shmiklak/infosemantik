@@ -13,16 +13,6 @@
         <div class="mobilemenu__content">
             <ul class="mobile-links mobile-links--level--0" data-collapse
                 data-collapse-opened-class="mobile-links__item--open">
-                @foreach($menu as $item)
-                    <li class="mobile-links__item">
-                        <div class="mobile-links__item-title">
-                            <a @if($item->is_pricelist == 1) href="/{{ $settings->price_list }}"
-                               download @else href="/{{$item->link }} @endif" class="mobile-links__item-link">
-                                {{ $item->title }}
-                            </a>
-                        </div>
-                    </li>
-                @endforeach
                 <li class="mobile-links__item" data-collapse-item>
                     <div class="mobile-links__item-title"><a href="#" class="mobile-links__item-link">Категории</a>
                         <button class="mobile-links__item-toggle" type="button" data-collapse-trigger>
@@ -66,6 +56,16 @@
                         </ul>
                     </div>
                 </li>
+                @foreach($menu as $item)
+                    <li class="mobile-links__item">
+                        <div class="mobile-links__item-title">
+                            <a @if($item->is_pricelist == 1) href="/{{ $settings->price_list }}"
+                               download @else href="/{{$item->link }} @endif" class="mobile-links__item-link">
+                                {{ $item->title }}
+                            </a>
+                        </div>
+                    </li>
+                @endforeach
             </ul>
         </div>
     </div>
@@ -110,6 +110,22 @@
                                 <button class="indicator__button"><span class="indicator__area"><svg width="20px"
                                                                                                      height="20px"><use
                                                 xlink:href="/images/sprite.svg#search-20"></use></svg></span></button>
+                            </div>
+                            <div class="indicator comparison-indicator indicator--mobile">
+                                <a href="{{ route('compare') }}" data-toggle="tooltip" data-original-title="Сравнение"
+                                   class="indicator__button">
+                                        <span class="indicator__area"><svg width="20px" height="20px">
+                                                <use xlink:href="/images/sprite.svg#compare-16"></use>
+                                            </svg>
+                                            <span class="indicator__value">
+                                                @if (Session::get('comparison') != null)
+                                                    {{ count(Session::get('comparison')) }}
+                                                @else
+                                                    0
+                                                @endif
+                                            </span>
+                                        </span>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -178,7 +194,8 @@
                             </div><!-- .nav-links / end -->
                             <div class="nav-panel__indicators comparison-indicator">
                                 <div class="indicator">
-                                    <a href="{{ route('compare') }}" class="indicator__button">
+                                    <a href="{{ route('compare') }}" data-toggle="tooltip"
+                                       data-original-title="Сравнение" class="indicator__button">
                                         <span class="indicator__area"><svg width="20px" height="20px">
                                                 <use xlink:href="/images/sprite.svg#compare-16"></use>
                                             </svg>

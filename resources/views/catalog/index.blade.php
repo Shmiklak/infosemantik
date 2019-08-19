@@ -29,7 +29,7 @@
         <div class="container">
             <div class="shop-layout shop-layout--sidebar--start">
                 <div class="shop-layout__sidebar">
-                    <div class="block block-sidebar block-sidebar--offcanvas--mobile">
+                    <div class="block block-sidebar">
                         <div class="block-sidebar__body">
                             <div class="block-sidebar__header">
                                 <div class="block-sidebar__title">Категории</div>
@@ -40,7 +40,7 @@
                                 </button>
                             </div>
                             <div class="block-sidebar__item">
-                                <div class="widget-filters widget widget-filters--offcanvas--mobile" data-collapse
+                                <div class="widget-filters widget" data-collapse
                                      data-collapse-opened-class="filter--opened"><h4
                                         class="widget-filters__title widget__title">Категории</h4>
                                     <div class="widget-filters__list">
@@ -74,12 +74,13 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
                 <div class="shop-layout__content">
                     <div class="block">
                         <div class="products-view">
                             <div class="products-view__options">
-                                <div class="view-options view-options--offcanvas--mobile">
+                                <div class="view-options">
                                     <div class="view-options__control"><label for="">Сортировка</label>
                                         <div>
                                             <form method="POST" action="{{ route('catalog.sort') }}" id="sort-form">
@@ -99,7 +100,9 @@
                                  data-with-features="false">
                                 <div class="products-list__body">
                                     @if(count($products) == 0)
+                                        <div class="no-products">
                                         Нет продуктов в этой категории
+                                        </div>
                                     @else
                                         @foreach($products as $product)
                                             <div class="products-list__item">

@@ -82,7 +82,11 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Главное описание</label>
+                                        <label for="short_description">Краткое описание</label>
+                                        <textarea name="short_description" id="short_description"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampldescriptioneInputEmail1">Главное описание</label>
                                         <textarea name="description" id="description"></textarea>
                                     </div>
                                     <div class="checkbox">
@@ -143,6 +147,9 @@
 
         let editor = CKEDITOR.replace('description');
         CKFinder.setupCKEditor(editor);
+
+        let shorteditor = CKEDITOR.replace('short_description');
+        CKFinder.setupCKEditor(shorteditor);
 
         $('.select2').select2();
 

@@ -121,6 +121,9 @@
                         </div><!-- .product__gallery / end --><!-- .product__info -->
                         <div class="product__info">
                             <h1 class="product__name">{{ $product->title }}</h1>
+                            <div class="product__description">
+                                {!! $product->short_description !!}
+                            </div>
                             <ul class="product__meta">
                                 <li class="product__meta-availability">Наличие:
                                     @if($product->is_available == 1)
