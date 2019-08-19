@@ -42,7 +42,7 @@
                                             <a
                                                 href="mailto:{{ $settings->email }}">{{ $settings->email }}</a>
                                         </p>
-                                        <p>
+                                        <p class="phone">
                                             <strong>Телефон</strong><br>
                                             <a
                                                 href="tel:+99871 {{ $settings->phone_1 }}">+(99871) {{ $settings->phone_1 }}</a>

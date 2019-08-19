@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Attribute;
 use App\Category;
 use App\Exports\ProductsExport;
+use App\SEO;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Product;
@@ -87,6 +88,8 @@ class ProductsController extends Controller
                 }
             }
         }
+
+        $seoSettings = SEO::create(['site_name'=>$product->title, 'path'=>'products/'.$product->slug, 'description'=>$product->short_description]);
 
         return redirect()->route('products.index')->with('message', 'Продукт успешно добавлен');
     }

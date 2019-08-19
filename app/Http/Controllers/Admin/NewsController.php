@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\SEO;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\News;
@@ -53,6 +54,7 @@ class NewsController extends Controller
         $news->image = $path;
 
         $news->save();
+        $seoSettings = SEO::create(['site_name'=>$news->title, 'path'=>'news/'.$news->slug, 'description'=>$news->shortDescription()]);
 
         $news->sendEmail($request->get('newsletter'));
 
