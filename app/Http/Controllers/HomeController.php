@@ -302,7 +302,7 @@ class HomeController extends Controller
         if (count($products) > 1) {
             foreach ($products as $key => $product) {
                 if ($product->id == $request->id) {
-                    unset($products[$key]);
+                    array_splice($products, $key, 1);
                     request()->session()->put('comparison', $products);
                     return redirect()->back();
                 }
