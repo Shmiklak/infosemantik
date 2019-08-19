@@ -25,6 +25,11 @@
                         <div class="posts-view">
                             <div class="posts-view__list posts-list posts-list--layout--list">
                                 <div class="posts-list__body">
+                                    @if($results['total'] == 0)
+                                        <p>
+                                            Нет результатов
+                                        </p>
+                                    @endif
                                     @foreach($results as $item)
                                         <div class="posts-list__item">
                                             <div class="post-card post-card--layout--list post-card--size--nl">
