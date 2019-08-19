@@ -120,7 +120,7 @@ svg {
 }
 
 a, a:hover {
-    color: #36c
+    color: #36c;
 }
 
 a:hover {
@@ -2021,7 +2021,7 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-origin {
 }
 
 .post-card__name a:hover {
-    color: #36c
+    color: #36c;
 }
 
 .post-card__content {
