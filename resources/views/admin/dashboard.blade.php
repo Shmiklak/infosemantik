@@ -2,8 +2,8 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Page Header
-            <small>Optional description</small>
+            Добро пожаловать в панель управления
+            <small>Тут вы можете управлять содержимым вашего сайта, а также изменять его основные параметры.</small>
         </h1>
     </section>
 
