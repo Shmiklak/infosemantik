@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Admin;
 use App\Attribute;
 use App\Category;
 use App\Exports\ProductsExport;
+use App\Exports\ProductsExportEmpty;
 use App\SEO;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Product;
 use App\Imports\ProductsImport;
 use Maatwebsite\Excel\Facades\Excel;
+use DB;
+use Illuminate\Support\Facades\Storage;
 
 class ProductsController extends Controller
 {
@@ -145,9 +148,43 @@ class ProductsController extends Controller
         return Excel::download(new ProductsExport, 'products.xlsx');
     }
 
+    public function exportEmpty() {
+        return Excel::download(new ProductsExportEmpty, 'template.xlsx');
+    }
+
     public function import(Request $request)
+    {
+        Product::truncate();
+        DB::table('product_attributes')->truncate();
+
+        Excel::import(new ProductsImport, request()->file('excel'));
+        return redirect()->route('products.index')->with('message', 'База данных продуктов успешно обновлена');
+    }
+
+    public function importNew(Request $request)
     {
         Excel::import(new ProductsImport, request()->file('excel'));
         return redirect()->route('products.index')->with('message', 'База данных продуктов успешно обновлена');
+    }
+
+    public function images() {
+        $files = Storage::drive('local')->allFiles('uploads/products');
+        return view('admin.products.images')->withFiles($files);
+    }
+
+    public function uploadImages(Request $request) {
+        $files = $request->file('images');
+        if($request->hasFile('images'))
+        {
+            foreach ($files as $file) {
+                $file->storeAs('uploads/products/', $file->getClientOriginalName());
+            }
+        }
+        return redirect()->route('products.images');
+    }
+
+    public function deleteImage(Request $request) {
+        unlink($request->file);
+        return response()->json(['success' => 'Операция выполнена.', 'message' => 'Изображение было удалено.']);
     }
 }

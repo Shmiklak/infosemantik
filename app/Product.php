@@ -12,7 +12,7 @@ class Product extends Model
 {
     Use Sluggable;
 
-    protected $fillable = ['title', 'description', 'short_description','category_id'];
+    protected $fillable = ['custom_id', 'title', 'description', 'short_description','category_id'];
 
     public function sluggable()
     {
@@ -80,7 +80,7 @@ class Product extends Model
     }
 
     public function setAttributes($value, $field) {
-        if(empty($value)) {
+        if(empty($value) || $value == '-') {
             return;
         }
         $attr = substr($field, 10);

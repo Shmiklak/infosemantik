@@ -3,6 +3,7 @@
 namespace App;
 use App\Settings;
 use App\SEO;
+use App\Category;
 use Illuminate\Database\Eloquent\Model;
 
 if (! function_exists('getPageTitle')) {

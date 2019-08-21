@@ -8,11 +8,14 @@ use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class ProductsExport implements FromView, ShouldAutoSize
+class ProductsExportEmpty implements FromView, ShouldAutoSize
 {
+    /**
+    * @return \Illuminate\Support\Collection
+    */
     public function view(): View
     {
-        return view('exports.products', [
+        return view('exports.products_empty', [
             'products' => Product::all(),
             'attributes' => Attribute::all()
         ]);
