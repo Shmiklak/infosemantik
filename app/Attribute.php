@@ -19,6 +19,17 @@ class Attribute extends Model
         }
     }
 
+    public function toggleShownAtTop($value)
+    {
+        if ($value == "false") {
+            $this->shown_at_top = 0;
+            $this->save();
+        } else {
+            $this->shown_at_top = 1;
+            $this->save();
+        }
+    }
+
     public function categories()
     {
         return $this->belongsToMany(

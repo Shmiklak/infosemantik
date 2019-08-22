@@ -11,8 +11,10 @@
                             <div class="product-card">
 
                                 @if(strtotime($product->created_at) > strtotime('1 week ago'))
-                                    <div class="product-card__badge product-card__badge--new">
-                                        Новинка
+                                    <div class="product-card__badges-list">
+                                        <div class="product-card__badge product-card__badge--new">
+                                            Новинка
+                                        </div>
                                     </div>
                                 @endif
                                 <div class="product-card__image"><a href="{{ route('product', $product->slug) }}"><img

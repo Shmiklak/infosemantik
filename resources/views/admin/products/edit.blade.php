@@ -36,6 +36,12 @@
                                                    value="{{ $product->slug }}" required>
                                         </div>
                                         <div class="form-group">
+                                            <label for="title">Уникальный ключ</label>
+                                            <input type="text" class="form-control" id="custom_id" name="custom_id"
+                                                   value="{{ $product->custom_id }}"
+                                                   required>
+                                        </div>
+                                        <div class="form-group">
                                             <label for="image">Главное изображение</label>
                                             <input type="file" id="image" name="main_image" class="has-preview"
                                                    data-preview="#image-preview" accept="image/*">

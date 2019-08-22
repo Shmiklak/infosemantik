@@ -67,6 +67,11 @@
                                 <input type="checkbox" id="has_ckeditor" name="has_ckeditor"> Включить CKEditor
                             </label>
                         </div>
+                        <div class="checkbox form-group">
+                            <label>
+                                <input type="checkbox" id="shown_at_top" name="shown_at_top"> Показывать вверху страницы продукта
+                            </label>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary add-attribute pull-left">
@@ -109,6 +114,11 @@
                         <div class="checkbox form-group">
                             <label>
                                 <input type="checkbox" id="has_ckeditor2" name="has_ckeditor2"> Включить CKEditor
+                            </label>
+                        </div>
+                        <div class="checkbox form-group">
+                            <label>
+                                <input type="checkbox" id="shown_at_top2" name="shown_at_top2"> Показывать вверху страницы продукта
                             </label>
                         </div>
                     </div>
@@ -189,7 +199,7 @@
                         data: null,
                         searchable: false,
                         render: function (row, type, val, meta) {
-                            return '<button class="btn btn-primary btn-update" data-id="' + val.id + '" data-toggle="modal" data-categories="' + val.categories + '" data-title="' + val.title + '"  data-ck="' + val.has_ckeditor + '" data-target="#editModal"><i class="fa fa-pencil"></i></button> <button class="btn btn-danger btn-delete" data-id="' + val.id + '" data-toggle="modal" data-target="#trashModal"><i class="fa fa-trash"></i></button>';
+                            return '<button class="btn btn-primary btn-update" data-id="' + val.id + '" data-toggle="modal" data-categories="' + val.categories + '" data-title="' + val.title + '"  data-ck="' + val.has_ckeditor + '" data-shown="' + val.shown_at_top + '" data-target="#editModal"><i class="fa fa-pencil"></i></button> <button class="btn btn-danger btn-delete" data-id="' + val.id + '" data-toggle="modal" data-target="#trashModal"><i class="fa fa-trash"></i></button>';
                         }
                     }
                 ]
@@ -290,6 +300,7 @@
                 }
                 let title = $(this).data('title'),
                     ckeditor = $(this).data('ck'),
+                    shown = $(this).data('shown'),
                     id = $(this).data('id');
 
                 $(".edit-form #category_id2").val(categories).change();
@@ -300,6 +311,14 @@
                     $("#has_ckeditor2").prop('checked', true);
                 } else {
                     $("#has_ckeditor2").prop('checked', false);
+                }
+
+                console.log(shown);
+
+                if (shown == 1) {
+                    $("#shown_at_top2").prop('checked', true);
+                } else {
+                    $("#shown_at_top2").prop('checked', false);
                 }
             });
 

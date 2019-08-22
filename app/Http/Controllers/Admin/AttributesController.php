@@ -34,6 +34,7 @@ class AttributesController extends Controller
         ]);
         $attribute = Attribute::create($request->all());
         $attribute->toggleCKEditor($request->has_ckeditor);
+        $attribute->toggleShownAtTop($request->shown_at_top);
         $attribute->setCategories($request->categories);
         $attribute->save();
         return response()->json(['success' => 'Операция выполнена.', 'message' => 'Атрибут был добавлен.']);
@@ -47,6 +48,7 @@ class AttributesController extends Controller
                 "id"=>$attribute->id,
                 "title"=>$attribute->title,
                 "has_ckeditor"=>$attribute->has_ckeditor,
+                "shown_at_top"=>$attribute->shown_at_top,
                 "categories"=>$attribute->categories()->pluck('category_id')
             ];
         }
@@ -68,6 +70,7 @@ class AttributesController extends Controller
         $attribute = Attribute::find($request->id);
         $attribute->fill($request->all());
         $attribute->toggleCKEditor($request->has_ckeditor);
+        $attribute->toggleShownAtTop($request->shown_at_top);
         $attribute->setCategories($request->categories);
         $attribute->save();
         return response()->json(['success' => 'Операция выполнена.', 'message' => 'Атрибут был изменен.']);

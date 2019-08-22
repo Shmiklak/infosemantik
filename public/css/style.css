@@ -8332,7 +8332,7 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-origin {
 }
 
 .spec__row:first-of-type {
-    border-top: 1px solid #ebebeb
+    border-top: тщту;
 }
 
 .spec__name {
@@ -11963,4 +11963,12 @@ h4.contact-us__header.card-title {
 .contact-us__address .phone a {
     margin-bottom: -20px;
     display: block;
+}
+
+.spec__row:last-child {
+    border-bottom: none;
+}
+
+.short-desc {
+    margin-top: 15px;
 }
