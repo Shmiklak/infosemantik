@@ -36,8 +36,9 @@ class ProductsController extends Controller
     }
 
     public function create() {
+        $files = Storage::drive('local')->allFiles('uploads/products');
         $categories = Category::doesntHave('children')->get();
-        return view('admin.products.create')->withCategories($categories);
+        return view('admin.products.create')->withCategories($categories)->withFiles($files);
     }
 
     public function getAttributes(Request $request) {
@@ -66,12 +67,18 @@ class ProductsController extends Controller
             'title'=>'required',
             'custom_id'=>'required|unique:products',
             'description'=>'required',
-            'main_image'=>'required|image',
+            'main_image'=>'required',
             'category_id'=>'required'
         ]);
 
         $product = Product::add($request->all());
-        $product->uploadImage($request->file('main_image'));
+
+        if ($request->file('main_image') == null) {
+            $product->main_image = $request->get('main_image');
+        } else {
+            $product->uploadImage($request->file('main_image'));
+        }
+
         $product->setAvailable($request->get('is_available'));
         $product->setRecommended($request->get('is_recommended'));
         $product->setBestseller($request->get('is_bestseller'));
@@ -80,7 +87,12 @@ class ProductsController extends Controller
         foreach ($request->all() as $key => $attr) {
             if(!is_array($attr)) {
                 if (strpos($key, 'image_') !== false) {
-                    $product->uploadExtraimages($request->file($key), $key);
+                    if ($request->file($key) == null) {
+                        $product->$key = $request->get($key);
+                    }
+                    else {
+                        $product->uploadExtraimages($request->file($key), $key);
+                    }
                 }
             }
         }
@@ -93,6 +105,8 @@ class ProductsController extends Controller
             }
         }
 
+        $product->save();
+
         $seoSettings = SEO::create(['site_name'=>$product->title, 'path'=>'products/'.$product->slug, 'description'=>$product->short_description]);
 
         return redirect()->route('products.index')->with('message', 'Продукт успешно добавлен');
@@ -101,7 +115,8 @@ class ProductsController extends Controller
     public function edit($id) {
         $product = Product::find($id);
         $categories = Category::doesntHave('children')->get();
-        return view('admin.products.edit')->withProduct($product)->withCategories($categories);
+        $files = Storage::drive('local')->allFiles('uploads/products');
+        return view('admin.products.edit')->withProduct($product)->withCategories($categories)->withFiles($files);
     }
 
     public function update(Request $request, $id) {
@@ -116,7 +131,15 @@ class ProductsController extends Controller
         $product->edit($request->all());
         $product->slug = $request->get('slug');
         $product->save();
-        $product->uploadImage($request->file('main_image'));
+
+        if (!$request->get('main_image') == null) {
+            if ($request->file('main_image') == null) {
+                $product->main_image = $request->get('main_image');
+            } else {
+                $product->uploadImage($request->file('main_image'));
+            }
+        }
+
         $product->setAvailable($request->get('is_available'));
         $product->setRecommended($request->get('is_recommended'));
         $product->setBestseller($request->get('is_bestseller'));
@@ -124,7 +147,15 @@ class ProductsController extends Controller
         foreach ($request->all() as $key => $attr) {
             if(!is_array($attr)) {
                 if (strpos($key, 'image_') !== false) {
-                    $product->uploadExtraimages($request->file($key), $key);
+                    if ($request->file($key) == null) {
+                        if (!$request->get($key) == null) {
+                            $product->$key = $request->get($key);
+                            $product->save();
+                        }
+                    }
+                    else {
+                        $product->uploadExtraimages($request->file($key), $key);
+                    }
                 }
             }
         }
@@ -187,6 +218,14 @@ class ProductsController extends Controller
 
     public function deleteImage(Request $request) {
         unlink($request->file);
+        return response()->json(['success' => 'Операция выполнена.', 'message' => 'Изображение было удалено.']);
+    }
+
+    public function removeImageFromProduct(Request $request) {
+        $field = $request->get('input');
+        $product = Product::find($request->id);
+        $product->$field = null;
+        $product->save();
         return response()->json(['success' => 'Операция выполнена.', 'message' => 'Изображение было удалено.']);
     }
 }

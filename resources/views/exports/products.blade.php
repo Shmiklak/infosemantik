@@ -16,6 +16,7 @@
         <th style="font-weight: bold">Наличие</th>
         <th style="font-weight: bold">Отображать в рекомендованных</th>
         <th style="font-weight: bold">Бестселлер</th>
+        <th style="font-weight: bold">Дата публикации</th>
         @foreach($attributes as $attribute)
             <th style="font-weight: bold">{{ $attribute->title }}  - ID: ({{ $attribute->id }})</th>
         @endforeach
@@ -39,6 +40,7 @@
             <td>{{ $product->is_available }}</td>
             <td>{{ $product->is_recommended }}</td>
             <td>{{ $product->is_bestseller }}</td>
+            <td>"{{ $product->created_at }}"</td>
             @foreach($attributes as $attribute)
                 <td>
                     {{ $product->getValueOfAttribute($attribute->id, $product->id) }}

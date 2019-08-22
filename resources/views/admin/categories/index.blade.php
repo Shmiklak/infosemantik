@@ -341,9 +341,12 @@
             margin: 6px 0;
             border-radius: 5px;
             height: 40px;
-            background: #FFF;
+            background: #dbf2ff;
             font-size: 16px;
             font-weight: bold;
+        }
+        .item-content+.dd-list .item-content {
+            background: #FFF;
         }
     </style>
 @endpush
@@ -362,6 +365,8 @@
                 <div class="box box-primary">
                     <div class="box-header with-border">
                         <h3 class="box-title">Перетаскивайте элементы мышкой для управления их порядком</h3>
+                        <a class="btn btn-primary" href="{{ route('categories.create') }}">Добавить категорию</a>
+                        <a class="btn btn-success" onclick="updateCategories()">Обновить порядок</a>
                     </div>
                     <div class="box-body">
                         <ol class="dd-list">
@@ -423,8 +428,6 @@
                         </ol>
                     </div>
                     <div class="box-footer">
-                        <a class="btn btn-primary" href="{{ route('categories.create') }}">Добавить категорию</a>
-                        <a class="btn btn-success" onclick="updateCategories()">Обновить порядок</a>
                     </div>
                 </div>
             </div>

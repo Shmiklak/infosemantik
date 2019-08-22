@@ -4,8 +4,11 @@ namespace App\Imports;
 
 use App\Category;
 use App\Product;
+use App\SEO;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Illuminate\Support\Carbon;
+use Faker\Provider\DateTime;
 
 class ProductsImport implements ToModel, WithHeadingRow
 {
@@ -35,7 +38,11 @@ class ProductsImport implements ToModel, WithHeadingRow
             'is_available'=>(intval($row['nalichie']) == 1 ? 1: 0),
             'is_recommended'=>(intval($row['otobrazhat_v_rekomendovannykh']) == 1 ? 1: 0),
             'is_bestseller'=>(intval($row['bestseller']) == 1 ? 1: 0),
+            'created_at'=>$row['data_publikatsii'],
         ];
+
+        $datestring = str_replace('"', '', $request['created_at']);
+        $created_date = Carbon::parse($datestring);
 
         $product = Product::add($request);
         $product->main_image = $request['main_image'];
@@ -45,6 +52,7 @@ class ProductsImport implements ToModel, WithHeadingRow
         $product->image_4 = $request['image_4'];
         $product->image_5 = $request['image_5'];
         $product->image_6 = $request['image_6'];
+        $product->created_at = $created_date;
         $product->setAvailable($request['is_available']);
         $product->setRecommended($request['is_recommended']);
         $product->setBestseller($request['is_bestseller']);
@@ -59,5 +67,7 @@ class ProductsImport implements ToModel, WithHeadingRow
         }
 
         $product->save();
+
+        $seoSettings = SEO::create(['site_name'=>$product->title, 'path'=>'products/'.$product->slug, 'description'=>$product->short_description]);
     }
 }

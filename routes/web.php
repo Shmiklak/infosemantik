@@ -103,6 +103,7 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>'admin'], f
        Route::post('/import-new', 'ProductsController@importNew')->name('products.import.new');
        Route::get('/images', 'ProductsController@images')->name('products.images');
        Route::post('/uploadImages', 'ProductsController@uploadImages')->name('products.upload_images');
+       Route::post('/remove-image', 'ProductsController@removeImageFromProduct');
        Route::delete('/images/delete', 'ProductsController@deleteImage')->name('products.delete_image');
     });
 

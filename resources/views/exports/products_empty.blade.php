@@ -16,12 +16,33 @@
         <th style="font-weight: bold">Наличие</th>
         <th style="font-weight: bold">Отображать в рекомендованных</th>
         <th style="font-weight: bold">Бестселлер</th>
+        <th style="font-weight: bold">Дата публикации</th>
         @foreach($attributes as $attribute)
-            <th style="font-weight: bold">{{ $attribute->title }}  - ID: ({{ $attribute->id }})</th>
+            <th style="font-weight: bold">{{ $attribute->title }} - ID: ({{ $attribute->id }})</th>
         @endforeach
     </tr>
     </thead>
     <tbody>
-
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>"{{ \Carbon\Carbon::now() }}"</td>
+        @foreach($attributes as $attribute)
+            <td></td>
+        @endforeach
+    </tr>
     </tbody>
 </table>
