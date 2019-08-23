@@ -482,7 +482,7 @@
                 margin: 14,
                 nav: false,
                 dots: false,
-                loop: true,
+                loop: false,
                 stagePadding: 1,
                 rtl: isRTL()
             };

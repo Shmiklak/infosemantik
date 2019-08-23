@@ -1,5 +1,5 @@
 .upload-preview img {
-    max-width: 100%;
+    max-width: 80%;
 }
 
 .destroy-form button{
@@ -20,4 +20,9 @@ td .btn-group {
 
 img[src="/"] {
     display: none;
+}
+
+.upload-preview {
+    display: flex;
+    align-items: center;
 }

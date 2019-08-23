@@ -51,6 +51,7 @@
 
                         <div class="box-footer">
                             <button type="submit" class="btn btn-primary">Обновить</button>
+                            <a class="btn btn-default pull-right" href="{{ route('vendors.index') }}">Назад</a>
                         </div>
                     </form>
                 </div>

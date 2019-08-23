@@ -107,7 +107,7 @@ class ProductsController extends Controller
 
         $product->save();
 
-        $seoSettings = SEO::create(['site_name'=>$product->title, 'path'=>'products/'.$product->slug, 'description'=>$product->short_description]);
+        $seoSettings = SEO::create(['site_name'=>$product->title, 'path'=>'products/'.$product->slug, 'description'=>strip_tags($product->short_description)]);
 
         return redirect()->route('products.index')->with('message', 'Продукт успешно добавлен');
     }
@@ -159,6 +159,8 @@ class ProductsController extends Controller
                 }
             }
         }
+
+        $product->cleanAttributes();
 
         foreach ($request->all() as $key => $attr) {
             if(!is_array($attr)) {

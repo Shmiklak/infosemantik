@@ -19,7 +19,7 @@
                                     </svg>
                                 </li>
                             @endif
-                            <li class="breadcrumb-item"><a href="#">{{ $product->category->title }}</a>
+                            <li class="breadcrumb-item"><a href="{{ route('category', $product->category->slug) }}">{{ $product->category->title }}</a>
                                 <svg class="breadcrumb-arrow" width="6px" height="9px">
                                     <use xlink:href="/images/sprite.svg#arrow-rounded-right-6x9"></use>
                                 </svg>

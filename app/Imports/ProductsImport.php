@@ -60,14 +60,12 @@ class ProductsImport implements ToModel, WithHeadingRow
         foreach ($row as $key=>$value) {
             if (strpos($key, 'id') !== false) {
                 $attr_id = substr($key, strpos($key, 'id_')+3);
-                if ($attr_id == 24) {
-                    $product->setAttributes($value, 'attribute-'.$attr_id);
-                }
+                $product->setAttributes($value, 'attribute-'.$attr_id);
             }
         }
 
         $product->save();
 
-        $seoSettings = SEO::create(['site_name'=>$product->title, 'path'=>'products/'.$product->slug, 'description'=>$product->short_description]);
+        $seoSettings = SEO::create(['site_name'=>$product->title, 'path'=>'products/'.$product->slug, 'description'=>strip_tags($product->short_description)]);
     }
 }

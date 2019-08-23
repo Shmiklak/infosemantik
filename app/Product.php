@@ -79,6 +79,10 @@ class Product extends Model
         $this->delete();
     }
 
+    public function cleanAttributes() {
+        DB::table('product_attributes')->where('product_id', $this->id)->delete();
+    }
+
     public function setAttributes($value, $field) {
         if(empty($value) || $value == '-') {
             return;

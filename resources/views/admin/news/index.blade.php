@@ -14,6 +14,7 @@
                 <div class="box box-primary">
                     <div class="box-header with-border">
                         <h3 class="box-title">Список</h3>
+                        <a class="btn btn-primary pull-right" href="{{ route('news.create') }}">Добавить новость</a>
                     </div>
                     <div class="box-body">
                         <div class="box-body no-padding">
@@ -63,7 +64,7 @@
                         </div>
                     </div>
                     <div class="box-footer">
-                        <a class="btn btn-primary" href="{{ route('news.create') }}">Добавить новость</a>
+
                     </div>
                 </div>
             </div>

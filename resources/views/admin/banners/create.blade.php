@@ -52,6 +52,7 @@
 
                         <div class="box-footer">
                             <button type="submit" class="btn btn-primary">Добавить</button>
+                            <a class="btn btn-default pull-right" href="{{ route('banners.index') }}">Назад</a>
                         </div>
                     </form>
                 </div>

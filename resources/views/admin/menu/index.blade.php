@@ -362,6 +362,8 @@
                 <div class="box box-primary">
                     <div class="box-header with-border">
                         <h3 class="box-title">Перетаскивайте элементы мышкой для управления их порядком</h3>
+                        <a class="btn btn-primary" href="{{ route('menu.create') }}">Добавить пункт меню</a>
+                        <a class="btn btn-success" onclick="updateMenu()">Обновить порядок</a>
                     </div>
                     <div class="box-body">
                         <ol class="dd-list">
@@ -393,8 +395,7 @@
                         </ol>
                     </div>
                     <div class="box-footer">
-                        <a class="btn btn-primary" href="{{ route('menu.create') }}">Добавить пункт меню</a>
-                        <a class="btn btn-success" onclick="updateMenu()">Обновить порядок</a>
+
                     </div>
                 </div>
             </div>

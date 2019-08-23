@@ -12,6 +12,7 @@
                 <div class="box">
                     <div class="box-header">
                         <h3 class="box-title">Атрибуты</h3>
+                        <a class="btn btn-primary call-add pull-right" data-toggle="modal" data-target="#addAttribute">Добавить атрибут</a>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
@@ -29,7 +30,7 @@
                     </div>
 
                     <div class="box-footer">
-                        <a class="btn btn-primary call-add" data-toggle="modal" data-target="#addAttribute">Добавить атрибут</a>
+
                     </div>
                     <!-- /.box-body -->
                 </div>

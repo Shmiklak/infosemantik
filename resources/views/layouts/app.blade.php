@@ -37,14 +37,14 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i"><!-- css -->
     <link rel="stylesheet" href="/vendor/bootstrap-4.2.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="/vendor/owl-carousel-2.3.4/assets/owl.carousel.min.css">
-    <link rel="stylesheet" href="/css/style.css?v=1.2"><!-- js -->
+    <link rel="stylesheet" href="/css/style.css?v=1.3"><!-- js -->
     <script src="/vendor/jquery-3.3.1/jquery.min.js"></script>
     <script src="/vendor/bootstrap-4.2.1/js/bootstrap.bundle.min.js"></script>
     <script src="/vendor/owl-carousel-2.3.4/owl.carousel.min.js"></script>
     <script src="/vendor/nouislider-12.1.0/nouislider.min.js"></script>
     <script src="/js/sweetalert.min.js"></script>
     <script src="/js/number.js"></script>
-    <script src="/js/main.js?v=1.02"></script>
+    <script src="/js/main.js?v=1.1"></script>
     <script src="/vendor/svg4everybody-2.1.9/svg4everybody.min.js"></script>
     <script>svg4everybody();</script><!-- font - fontawesome -->
     <link rel="stylesheet" href="/vendor/fontawesome-5.6.1/css/all.min.css"><!-- font - stroyka -->
