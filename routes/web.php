@@ -17,6 +17,10 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/news/{slug}', 'HomeController@newsPage')->name('news-page');
 Route::get('/news', 'HomeController@news')->name('news');
 
+//Полезное
+Route::get('/useful/{slug}', 'HomeController@usefulPage')->name('useful-page');
+Route::get('/useful', 'HomeController@useful')->name('useful');
+
 //Контакты
 Route::get('/contacts', 'HomeController@contactsPage')->name('contacts');
 Route::post('/contacts', 'HomeController@feedback')->name('email');
@@ -62,6 +66,9 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>'admin'], f
 
     //Ноаости
     Route::resource('/news', 'NewsController');
+
+    //Полезное
+    Route::resource('/useful', 'UsefulController');
 
     //Вендоры
     Route::resource('/vendors', 'VendorsController');

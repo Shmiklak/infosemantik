@@ -9,6 +9,7 @@ use App\Mail\Feedback;
 use App\News;
 use App\Product;
 use App\Subscription;
+use App\Useful;
 use App\Vendor;
 use Hamcrest\Core\Set;
 use Illuminate\Http\Request;
@@ -37,6 +38,7 @@ class HomeController extends Controller
         $slideshow = Banner::orderBy('created_at', 'desc')->get();
         $vendors = Vendor::orderBy('created_at', 'desc')->get();
         $news = News::orderBy('created_at', 'desc')->take(4)->get();
+        $useful = Useful::orderBy('created_at', 'desc')->take(4)->get();
         $menu = Menu::orderBy('order', 'asc')->get();
         $settings = Settings::find(1);
 
@@ -44,6 +46,7 @@ class HomeController extends Controller
         View::share('slideshow', $slideshow);
         View::share('vendors', $vendors);
         View::share('news', $news);
+        View::share('useful', $useful);
         View::share('menu', $menu);
         View::share('settings', $settings);
     }
@@ -71,6 +74,19 @@ class HomeController extends Controller
     {
         $all_news = News::orderBy('created_at', 'desc')->paginate(5);
         return view('pages.news_listing', compact('all_news'));
+    }
+
+    public function usefulPage($slug)
+    {
+        $post = Useful::where('slug', $slug)->first();
+
+        return view('pages.useful_single', compact('post'));
+    }
+
+    public function useful()
+    {
+        $posts = Useful::orderBy('created_at', 'desc')->paginate(5);
+        return view('pages.useful', compact('posts'));
     }
 
     public function page($slug)
@@ -216,6 +232,9 @@ class HomeController extends Controller
         $news = News::where('title', 'like', '%' . $search . '%')
             ->orWhere('content', 'like', '%' . $search . '%')
             ->orderBy('created_at')->get();
+        $posts = Useful::where('title', 'like', '%' . $search . '%')
+            ->orWhere('content', 'like', '%' . $search . '%')
+            ->orderBy('created_at')->get();
 
         $results = [];
         foreach ($products as $item) {
@@ -234,6 +253,16 @@ class HomeController extends Controller
                 "title" => $item->title,
                 "description" => $item->shortDescription(),
                 "type" => "news",
+                "slug" => $item->slug,
+                "created_at" => $item->created_at
+            ];
+        }
+        foreach ($posts as $item) {
+            $results[] = [
+                "image" => $item->image,
+                "title" => $item->title,
+                "description" => $item->shortDescription(),
+                "type" => "useful",
                 "slug" => $item->slug,
                 "created_at" => $item->created_at
             ];
