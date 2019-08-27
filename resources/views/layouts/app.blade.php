@@ -34,10 +34,11 @@
     <meta property="og:description" content="{{ App\getPageDescription(request()->path()) }}">
     <meta property="og:image" content="/{{ $settings->logo }}">
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i"><!-- css -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i,700,700i&display=swap&subset=cyrillic" rel="stylesheet">
+    {{--    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i"><!-- css -->--}}
     <link rel="stylesheet" href="/vendor/bootstrap-4.2.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="/vendor/owl-carousel-2.3.4/assets/owl.carousel.min.css">
-    <link rel="stylesheet" href="/css/style.css?v=1.3"><!-- js -->
+    <link rel="stylesheet" href="/css/style.css?v=1.4"><!-- js -->
     <script src="/vendor/jquery-3.3.1/jquery.min.js"></script>
     <script src="/vendor/bootstrap-4.2.1/js/bootstrap.bundle.min.js"></script>
     <script src="/vendor/owl-carousel-2.3.4/owl.carousel.min.js"></script>
