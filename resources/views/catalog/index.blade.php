@@ -130,6 +130,9 @@
                                                             </a>
                                                         </div>
                                                     </div>
+                                                    <div class="product-card__description">
+                                                        {!! $product->catalog_description !!}
+                                                    </div>
                                                     <div class="product-card__actions">
                                                         <div class="product-card__availability">Наличие:
                                                             @if($product->is_available == 1)

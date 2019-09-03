@@ -2,8 +2,8 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Атрибуты
-            <small>Здесь вы можете увидеть список всех атрибутов</small>
+            Характеристики
+            <small>Здесь вы можете увидеть список всех характеристик</small>
         </h1>
     </section>
     <section class="content container-fluid">
@@ -11,8 +11,8 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Атрибуты</h3>
-                        <a class="btn btn-primary call-add pull-right" data-toggle="modal" data-target="#addAttribute">Добавить атрибут</a>
+                        <h3 class="box-title">Характеристики</h3>
+                        <a class="btn btn-primary call-add pull-right" data-toggle="modal" data-target="#add-characteristics">Добавить</a>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
@@ -20,7 +20,8 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Название атрибута</th>
+                                <th>Значение</th>
+                                <th>Атрибут</th>
                                 <th>Действия</th>
                             </tr>
                             </thead>
@@ -38,7 +39,7 @@
         </div>
     </section>
 
-    <div id="addAttribute" class="modal fade" role="dialog">
+    <div id="add-characteristics" class="modal fade" role="dialog">
         <div class="modal-dialog">
 
             <!-- Modal content-->
@@ -46,36 +47,30 @@
                 <form class="add-form">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Добавить атрибут</h4>
+                        <h4 class="modal-title">Добавить характеристику</h4>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label>Категория</label>
-                            <select class="form-control select2" style="width: 100%;" id="categories"
-                                    name="categories" multiple="multiple">
-                                @foreach($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->title }}</option>
+                            <label>Название</label>
+                            <input class="form-control" type="text" name="title" id="char-title">
+                        </div>
+                        <div class="form-group">
+                            <label>Атрибут</label>
+                            <select class="form-control select2" style="width: 100%;" id="attributes"
+                                    name="attributes">
+                                @foreach($attributes as $attr)
+                                    <option value="{{ $attr->id }}">{{ $attr->title }}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label>Название</label>
-                            <input class="form-control" type="text" name="title" id="attribute-title"
-                                   placeholder="Тип устройства">
-                        </div>
                         <div class="checkbox form-group">
                             <label>
-                                <input type="checkbox" id="has_ckeditor" name="has_ckeditor"> Включить CKEditor
-                            </label>
-                        </div>
-                        <div class="checkbox form-group">
-                            <label>
-                                <input type="checkbox" id="shown_at_top" name="shown_at_top"> Показывать вверху страницы продукта
+                                <input type="checkbox" id="shown_in_filter" name="shown_in_filter"> Включить в фильтрацию
                             </label>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary add-attribute pull-left">
+                        <button type="button" class="btn btn-primary add-characteristic pull-left">
                             Добавить
                         </button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
@@ -86,7 +81,7 @@
         </div>
     </div>
 
-    <div id="editModal" class="modal fade" role="dialog">
+    <div id="edit-characteristics" class="modal fade" role="dialog">
         <div class="modal-dialog">
 
             <!-- Modal content-->
@@ -94,38 +89,32 @@
                 <form class="edit-form">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Редактировать атрибут</h4>
+                        <h4 class="modal-title">Изменить характеристику</h4>
                     </div>
                     <div class="modal-body">
+                        <input type="hidden" id="char-id" name="id">
                         <div class="form-group">
-                            <input type="hidden" name="id" id="attribute-id">
-                            <label>Категория</label>
-                            <select class="form-control select2" style="width: 100%;" id="category_id2"
-                                    name="category_id" multiple="multiple">
-                                @foreach($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->title }}</option>
+                            <label>Название</label>
+                            <input class="form-control" type="text" name="title" id="char-title2">
+                        </div>
+                        <div class="form-group">
+                            <label>Атрибут</label>
+                            <select class="form-control select2" style="width: 100%;" id="attributes2"
+                                    name="attributes">
+                                @foreach($attributes as $attr)
+                                    <option value="{{ $attr->id }}">{{ $attr->title }}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label>Название</label>
-                            <input class="form-control" type="text" name="title" id="attribute-title2"
-                                   placeholder="Тип устройства">
-                        </div>
                         <div class="checkbox form-group">
                             <label>
-                                <input type="checkbox" id="has_ckeditor2" name="has_ckeditor2"> Включить CKEditor
-                            </label>
-                        </div>
-                        <div class="checkbox form-group">
-                            <label>
-                                <input type="checkbox" id="shown_at_top2" name="shown_at_top2"> Показывать вверху страницы продукта
+                                <input type="checkbox" id="show_in_filter2" name="show_in_filter"> Включить в фильтрацию
                             </label>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary update-attribute pull-left">
-                            Обновить
+                        <button type="button" class="btn btn-primary edit-characteristic pull-left">
+                            Изменить
                         </button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
                     </div>
@@ -134,6 +123,7 @@
 
         </div>
     </div>
+
 
     <div id="trashModal" class="modal fade" role="dialog">
         <div class="modal-dialog modal-sm">
@@ -162,7 +152,13 @@
     <script src="/js/admin/dataTables.bootstrap.min.js"></script>
     <script src="/js/admin/select2.full.min.js"></script>
     <script>
-        $(document).ready(function () {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $(document).ready(function() {
             let table = $('#listing').DataTable({
                 language: {
                     "processing": "Подождите...",
@@ -187,39 +183,39 @@
                     }
                 },
                 ajax: {
-                    "url": "{{ route('attributes.data') }}",
+                    "url": "{{ route('characteristics.data') }}",
                     "dataSrc": ""
                 },
                 columns: [
                     {data: 'id', name: 'id'},
-                    {data: 'title', name: 'title'},
+                    {data: 'value', name: 'value'},
+                    {data: 'attribute', name: 'attribute'},
                 ],
                 columnDefs: [
                     {
-                        targets: 2,
+                        targets: 3,
                         data: null,
                         searchable: false,
                         render: function (row, type, val, meta) {
-                            return '<button class="btn btn-primary btn-update" data-id="' + val.id + '" data-toggle="modal" data-categories="' + val.categories + '" data-title="' + val.title + '"  data-ck="' + val.has_ckeditor + '" data-shown="' + val.shown_at_top + '" data-target="#editModal"><i class="fa fa-pencil"></i></button> <button class="btn btn-danger btn-delete" data-id="' + val.id + '" data-toggle="modal" data-target="#trashModal"><i class="fa fa-trash"></i></button>';
+                            return '<button class="btn btn-primary btn-update" data-id="' + val.id + '" data-value="' + val.value + '" data-show="' + val.show + '" data-attr="' + val.attribute_id + '" data-toggle="modal"  data-target="#edit-characteristics"><i class="fa fa-pencil"></i></button> <button class="btn btn-danger btn-delete" data-id="' + val.id + '" data-toggle="modal" data-target="#trashModal"><i class="fa fa-trash"></i></button>';
                         }
                     }
                 ]
             });
 
-            function addAttribute() {
+            function createChar() {
                 $.ajax({
                     type: 'POST',
-                    url: '/admin/attributes/store',
+                    url: '{{ route('characteristics.store') }}',
                     data: {
-                        categories: $('#categories').val(),
-                        title: $('#attribute-title').val(),
-                        has_ckeditor: $("#has_ckeditor").prop('checked'),
-                        shown_at_top: $("#shown_at_top").prop('checked'),
+                        attribute_id: $('#attributes').val(),
+                        value: $('#char-title').val(),
+                        show_in_filter: $('#show_in_filter').val(),
                     },
                     success: function (data) {
                         swal(data.success, data.message, "success");
                         table.ajax.reload();
-                        $('#addAttribute').modal('hide');
+                        $('#add-characteristics').modal('hide');
                     },
                     error: function () {
                         swal('Что-то пошло не так', 'Пожалуйста повторите попытку позже', "error");
@@ -227,22 +223,20 @@
                 });
             }
 
-            function updateAttribute() {
+            function updateChar() {
                 $.ajax({
-                    type: 'PUT',
-                    url: '/admin/attributes/update',
+                   type: 'PUT',
+                    url: '{{ route('characteristics.update') }}',
                     data: {
-                        id: $("#attribute-id").val(),
-                        categories: $('#category_id2').val(),
-                        title: $('#attribute-title2').val(),
-                        has_ckeditor: $("#has_ckeditor2").prop('checked'),
-                        shown_at_top: $("#shown_at_top2").prop('checked'),
-
+                        id: $("#char-id").val(),
+                        attribute_id: $('#attributes2').val(),
+                        value: $('#char-title2').val(),
+                        show_in_filter: $('#show_in_filter2').val(),
                     },
                     success: function (data) {
                         swal(data.success, data.message, "success");
                         table.ajax.reload();
-                        $('#editModal').modal('hide');
+                        $('#edit-characteristics').modal('hide');
                     },
                     error: function () {
                         swal('Что-то пошло не так', 'Пожалуйста повторите попытку позже', "error");
@@ -250,10 +244,10 @@
                 });
             }
 
-            function deleteAttribute() {
+            function deleteChar() {
                 $.ajax({
                     type: 'DELETE',
-                    url: '/admin/attributes/delete',
+                    url: '{{ route('characteristics.delete') }}',
                     data: {
                         id: $("#delete-id").val(),
                     },
@@ -268,69 +262,44 @@
                 });
             }
 
+            $(".add-characteristic").on('click', function() {
+               createChar();
+            });
+
             $('.select2').select2();
 
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
-            $(".call-add").on('click', function() {
-                $('#attribute-title').val('');
-                $("#has_ckeditor").prop('checked', false);
-            });
-
-            $('.add-attribute').on('click', function () {
-                addAttribute();
-            });
-
-            $('.update-attribute').on('click', function () {
-                updateAttribute();
-            });
-
-            $('.delete-attribute').on('click', function () {
-                deleteAttribute();
-            });
-
             $(document).on('click', '.btn-update', function () {
-                let str = $(this).data('categories');
-                let categories;
-                if (str.toString().indexOf(',') > -1) {
-                    categories = $(this).data('categories').split(',');
-                }
-                else {
-                    categories = str;
-                }
-                let title = $(this).data('title'),
-                    ckeditor = $(this).data('ck'),
-                    shown = $(this).data('shown'),
-                    id = $(this).data('id');
+                let value = $(this).data('value'),
+                    show = $(this).data('show'),
+                    id = $(this).data('id'),
+                    attr = $(this).data('attr');
 
-                $(".edit-form #category_id2").val(categories).change();
-                $(".edit-form #attribute-title2").val(title);
-                $(".edit-form #attribute-id").val(id);
+                $(".edit-form #char-title2").val(value);
+                $(".edit-form #attributes2").val(attr).change();
+                $(".edit-form #char-id").val(id);
 
-                if (ckeditor == 1) {
-                    $("#has_ckeditor2").prop('checked', true);
+                if (show == 1) {
+                    $("#shown_in_filter2").prop('checked', true);
                 } else {
-                    $("#has_ckeditor2").prop('checked', false);
+                    $("#shown_in_filter2").prop('checked', false);
                 }
+            });
 
-                console.log(shown);
-
-                if (shown == 1) {
-                    $("#shown_at_top2").prop('checked', true);
-                } else {
-                    $("#shown_at_top2").prop('checked', false);
-                }
+            $(".edit-characteristic").on('click', function() {
+                updateChar();
             });
 
             $(document).on('click', '.btn-delete', function () {
                 let id = $(this).data('id');
                 $("#delete-id").val(id);
             });
+
+            $('.delete-attribute').on('click', function () {
+                deleteChar();
+            });
         });
+
+
     </script>
 @endpush
 @push('styles')

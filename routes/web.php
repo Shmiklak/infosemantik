@@ -114,6 +114,14 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>'admin'], f
        Route::delete('/images/delete', 'ProductsController@deleteImage')->name('products.delete_image');
     });
 
+    //Характеристики продуктов
+    Route::group(['prefix'=>'characteristics'], function() {
+       Route::get('/', 'CharacteristicsController@index')->name('characteristics.index');
+       Route::get('/load', 'CharacteristicsController@data')->name('characteristics.data');
+       Route::post('/store', 'CharacteristicsController@store')->name('characteristics.store');
+       Route::put('/update', 'CharacteristicsController@update')->name('characteristics.update');
+        Route::delete('/delete', 'CharacteristicsController@destroy')->name('characteristics.delete');
+    });
 
     //Сменить пароль
     Route::post('/change-password', 'AdminController@password')->name('admin.password');

@@ -25,7 +25,7 @@
                         <div class="posts-view">
                             <div class="posts-view__list posts-list posts-list--layout--list">
                                 <div class="posts-list__body">
-                                    @if($results['total'] == 0)
+                                    @if(count($results) == 0)
                                         <p>
                                             Нет результатов
                                         </p>

@@ -124,6 +124,7 @@ class VendorsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Vendor::find($id)->delete();
+        return redirect()->route('vendors.index')->with('message', 'Успешно удалено!');
     }
 }

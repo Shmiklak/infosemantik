@@ -13,6 +13,7 @@
         <th style="font-weight: bold">Изображение 6</th>
         <th style="font-weight: bold">Описание*</th>
         <th style="font-weight: bold">Краткое описание</th>
+        <th style="font-weight: bold">Описание для каталога</th>
         <th style="font-weight: bold">Наличие</th>
         <th style="font-weight: bold">Отображать в рекомендованных</th>
         <th style="font-weight: bold">Бестселлер</th>
@@ -37,6 +38,7 @@
             <td>{{ str_replace('uploads/products/', '', $product->image_6) }}</td>
             <td>{{ $product->description }}</td>
             <td>{{ $product->short_description }}</td>
+            <td>{{ $product->catalog_description }}</td>
             <td>{{ $product->is_available }}</td>
             <td>{{ $product->is_recommended }}</td>
             <td>{{ $product->is_bestseller }}</td>

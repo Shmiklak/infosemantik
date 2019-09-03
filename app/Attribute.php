@@ -48,4 +48,8 @@ class Attribute extends Model
         $this->categories()->detach();
         $this->delete();
     }
+
+    public function characteristics() {
+        return $this->hasMany(Characteristic::class, 'attribute_id', 'id');
+    }
 }

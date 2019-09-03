@@ -4906,7 +4906,7 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-origin {
 
 .nav-panel {
     height: 54px;
-    background: #013c7c;
+    /*background: #013c7c;*/
     box-shadow: 0 1px rgba(0, 0, 0, .04), inset 0 -1px rgba(0, 0, 0, .04);
     color: #fff
 }
@@ -5102,6 +5102,10 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-origin {
     position: relative;
     z-index: 100;
     background: #013c7c;
+    background-image: url('../images/header.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
     color: #fff
 }
 
@@ -11987,4 +11991,29 @@ h4.contact-us__header.card-title {
 
 .block-slideshow__slide {
     background: #f5f5f5;
+}
+
+.products-list[data-layout^=grid-] .product-card .product-card__description {
+    display: block;
+    text-align: center;
+    padding: 0 15px;
+    font-size: 12px;
+    max-height: 55px;
+    overflow: hidden;
+}
+
+.nav-panel--stuck .nav-panel {
+    background: #013c7c;
+    background-image: url(../images/header.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.mobile-header__panel {
+    background: #013c7c;
+    background-image: url(../images/header.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }

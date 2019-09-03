@@ -234,6 +234,11 @@
                                             <textarea name="description"
                                                       id="description">{!! $product->description !!}</textarea>
                                         </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Описание в каталоге</label>
+                                            <textarea name="catalog_description"
+                                                      id="catalog_description">{!! $product->catalog_description !!}</textarea>
+                                        </div>
                                         <div class="checkbox">
                                             <label>
                                                 <input type="checkbox" name="is_available"
@@ -328,6 +333,9 @@
         CKFinder.setupCKEditor(editor);
 
         let shorteditor = CKEDITOR.replace('short_description');
+        CKFinder.setupCKEditor(shorteditor);
+
+        let catalogeditor = CKEDITOR.replace('catalog_description');
         CKFinder.setupCKEditor(shorteditor);
 
         $('.select2').select2();

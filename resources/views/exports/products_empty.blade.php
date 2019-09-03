@@ -13,6 +13,7 @@
         <th style="font-weight: bold">Изображение 6</th>
         <th style="font-weight: bold">Описание*</th>
         <th style="font-weight: bold">Краткое описание</th>
+        <th style="font-weight: bold">Описание для каталога</th>
         <th style="font-weight: bold">Наличие</th>
         <th style="font-weight: bold">Отображать в рекомендованных</th>
         <th style="font-weight: bold">Бестселлер</th>
@@ -24,6 +25,7 @@
     </thead>
     <tbody>
     <tr>
+        <td></td>
         <td></td>
         <td></td>
         <td></td>

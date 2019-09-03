@@ -8,6 +8,7 @@
         <li ><a href="{{ route('categories.index') }}"><i class="fa fa-th"></i><span>Категории</span></a></li>
         <li ><a href="{{ route('products.index') }}"><i class="fa fa-shopping-cart"></i><span>Продукты</span></a></li>
         <li ><a href="{{ route('attributes.index') }}"><i class="fa fa-th-list"></i><span>Атрибуты</span></a></li>
+        <li ><a href="{{ route('characteristics.index') }}"><i class="fa fa-th-list"></i><span>Характеристики</span></a></li>
         <li ><a href="{{ route('news.index') }}"><i class="fa fa-newspaper-o"></i><span>Новости</span></a></li>
         <li ><a href="{{ route('useful.index') }}"><i class="fa fa-newspaper-o"></i><span>Полезное</span></a></li>
         <li class="header">Управление элементами сайта</li>

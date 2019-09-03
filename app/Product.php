@@ -12,7 +12,7 @@ class Product extends Model
 {
     Use Sluggable;
 
-    protected $fillable = ['custom_id', 'title', 'description', 'short_description','category_id'];
+    protected $fillable = ['custom_id', 'title', 'description', 'short_description','category_id', 'catalog_description'];
 
     public function sluggable()
     {
@@ -165,6 +165,10 @@ class Product extends Model
     }
 
     public function shortDescription() {
+        if ($this->short_description != null) {
+            return strip_tags($this->short_description);
+        }
+
         $text = substr($this->description, 0, 200 + 1);
 
         if($last_space = strrpos($text, ' ')) {
