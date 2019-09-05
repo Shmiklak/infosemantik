@@ -84,7 +84,7 @@ class Product extends Model
     }
 
     public function setAttributes($value, $field) {
-        if(empty($value) || $value == '-') {
+        if(empty($value) || $value == '-' || $value=="unset") {
             return;
         }
         $attr = substr($field, 10);

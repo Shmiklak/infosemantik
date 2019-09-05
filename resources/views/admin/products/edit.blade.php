@@ -341,7 +341,7 @@
         $('.select2').select2();
         loadAttributes(loadAttributesValues);
 
-        function loadAttributes(callback) {
+        function loadAttributes() {
             $.ajax({
                 type: 'GET',
                 url: '/admin/products/get-attributes',
@@ -349,28 +349,29 @@
                     id: $("#category").val(),
                 },
                 success: function (data) {
+                    console.log(data);
                     let html = '';
-                    for (let i in data) {
-                        if (data[i].has_ckeditor == 1) {
-                            html += '<div class="form-group">' +
-                                '<label for="title">' + data[i].title + '</label>' +
-                                '<textarea class="ckeditor" id="attribute-' + data[i].id + '" name="attribute-' + data[i].id + '"></textarea>' +
-                                '</div>'
-                        } else {
-                            html += '<div class="form-group">' +
-                                '<label for="title">' + data[i].title + '</label>' +
-                                '<input type="text" class="form-control" id="attribute-' + data[i].id + '" name="attribute-' + data[i].id + '">' +
-                                '</div>'
-                        }
-                    }
-                    $('.attributes-box').html(html);
-                    $('.attributes-box .ckeditor').each(function () {
-                        let element = $(this).attr('id');
-                        CKEDITOR.replace(element, {
-                            customConfig: '/js/admin/attributes.js?v=1.2'
+
+                    data.attributes.forEach(item=> {
+                        html += '<div class="form-group">' +
+                            '<label for="title">' + item.title + '</label><br>' +
+                            '<div class="attr-box"><select class="select2-attrs" name="attribute-' + item.id + '" disabled="disabled" style="display: none;"><option value="unset">Не указан</option>';
+                        data.characteristics.forEach(list=> {
+                            if (list.attr == item.id) {
+                                list.items.forEach(item=> {
+                                    html += '<option value="' + item.value + '">' + item.value + '</option>'
+                                });
+                            }
                         });
+
+                        html += '</select>' + '<input id="attribute-' + item.id + '" class="form-control" type="text" name="attribute-' + item.id + '"><button type="button" class="btn btn-sm btn-success change-input-type"><i class="fa fa-pencil"></i></button></div>' +
+                            '</div>';
                     });
-                    callback();
+
+                    $('.attributes-box').html(html);
+                    $('.select2-attrs').select2();
+                    $('.attributes-box').find('.select2').hide();
+                    loadAttributesValues();
                 },
                 error: function () {
                     swal('Что-то пошло не так', 'Пожалуйста повторите попытку позже', "error");
@@ -419,6 +420,21 @@
                 }
             });
         }
+
+        $(document).on('click', '.change-input-type', function() {
+            if ($(this).parent().find('input').is('input[disabled]')) {
+                $(this).parent().find('input').removeAttr('disabled');
+                $(this).parent().find('input').show();
+                $(this).parent().find('.select2').hide();
+                $(this).parent().find('select').attr('disabled', 'disabled');
+
+            } else {
+                $(this).parent().find('select').removeAttr('disabled');
+                $(this).parent().find('input').attr('disabled', 'disabled');
+                $(this).parent().find('.select2').show();
+                $(this).parent().find('input').hide();
+            }
+        });
 
         $('#category').on('select2:select', function (e) {
             loadAttributes();
@@ -519,6 +535,18 @@
 
         .box-body .row .row {
             margin-bottom: 10px;
+        }
+
+        .box-body .row .row {
+            margin-bottom: 10px;
+        }
+
+        .select2-container {
+            width: 100% !important;
+        }
+
+        .attr-box {
+            display: flex;
         }
     </style>
 @endpush

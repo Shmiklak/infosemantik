@@ -43,7 +43,7 @@ Route::get('/logout', 'HomeController@logout')->name('logout');
 Route::get('/products/{slug}', 'HomeController@product')->name('product');
 Route::get('/categories/{slug}', 'HomeController@category')->name('category');
 Route::post('/categories', 'HomeController@sortCatalog')->name('catalog.sort');
-
+Route::get('/categories/{slug}/filter', 'HomeController@filterCatalog')->name('catalog.filter');
 Route::get('search', 'HomeController@search')->name('search');
 
 

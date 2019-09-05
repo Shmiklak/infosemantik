@@ -10572,7 +10572,7 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-origin {
 }
 
 .block-products-carousel[data-layout=grid-5] .product-card .product-card__actions {
-    padding: 0 15px 15px
+    padding: 0 8px 15px;
 }
 
 .block-products-carousel[data-layout=grid-5] .product-card .product-card__buttons .btn {
@@ -11847,7 +11847,7 @@ body.is-admin footer {
 
 .widget-filters {
     padding-bottom: 0;
-    border-bottom: 0;
+    /*border-bottom: 0;*/
 }
 
 img.product-gallery__carousel-image {

@@ -214,7 +214,61 @@ class HomeController extends Controller
         if ($sort == 4) {
             $products = Product::whereIn('category_id', $ids)->orderBy('title', 'desc')->paginate(10);
         }
-        return view('catalog.index')->withCategory($category)->withProducts($products)->withSort($sort);
+
+        $attributes = Category::where('slug', $slug)->first()->attributes()->get();
+
+        return view('catalog.index')->withCategory($category)->withProducts($products)->withSort($sort)->withAttributes($attributes);
+    }
+
+    public function filterCatalog(Request $request, $slug) {
+//        dd($request->all());
+        if (empty($request->all())) {
+            return redirect()->route('category', $slug);
+        }
+        if ($request->session()->get('sort') != null) {
+            $sort = $request->session()->get('sort');
+        } else {
+            $sort = 1;
+        }
+
+        $ids = [];
+        $categories = Category::where('slug', $slug)->first()->children;
+        foreach ($categories as $category) {
+            array_push($ids, $category->id);
+        }
+        $category = Category::where('slug', $slug)->first();
+        array_push($ids, $category->id);
+
+        $filterIds = [];
+
+        foreach ($request->filter as $key=>$item) {
+            $filterIds[] = DB::table('product_attributes')->where('attribute_id', $key)->where('value', $item)->pluck('product_id');
+        }
+
+        $attributes = Category::where('slug', $slug)->first()->attributes()->get();
+
+        $filterIdsUnique = array_unique($filterIds)[0];
+
+        if(count($filterIdsUnique) < 1) {
+            return view('catalog.empty')->withCategory($category)->withAttributes($attributes);
+        }
+
+        if ($sort == 1) {
+            $products = Product::whereIn('category_id', $ids)->whereIn('id', $filterIdsUnique)->orderBy('created_at', 'desc')->paginate(10);
+        }
+        if ($sort == 2) {
+            $products = Product::whereIn('category_id', $ids)->whereIn('id', $filterIdsUnique)->orderBy('created_at', 'asc')->paginate(10);
+        }
+        if ($sort == 3) {
+            $products = Product::whereIn('category_id', $ids)->whereIn('id', $filterIdsUnique)->orderBy('title', 'asc')->paginate(10);
+        }
+        if ($sort == 4) {
+            $products = Product::whereIn('category_id', $ids)->whereIn('id', $filterIdsUnique)->orderBy('title', 'desc')->paginate(10);
+        }
+
+
+
+        return view('catalog.index')->withCategory($category)->withProducts($products)->withSort($sort)->withAttributes($attributes);
     }
 
     public function search(Request $request)

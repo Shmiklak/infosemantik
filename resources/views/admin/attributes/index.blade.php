@@ -63,7 +63,7 @@
                             <input class="form-control" type="text" name="title" id="attribute-title"
                                    placeholder="Тип устройства">
                         </div>
-                        <div class="checkbox form-group">
+                        <div class="checkbox form-group" style="display: none">
                             <label>
                                 <input type="checkbox" id="has_ckeditor" name="has_ckeditor"> Включить CKEditor
                             </label>
@@ -112,7 +112,7 @@
                             <input class="form-control" type="text" name="title" id="attribute-title2"
                                    placeholder="Тип устройства">
                         </div>
-                        <div class="checkbox form-group">
+                        <div class="checkbox form-group" style="display: none">
                             <label>
                                 <input type="checkbox" id="has_ckeditor2" name="has_ckeditor2"> Включить CKEditor
                             </label>

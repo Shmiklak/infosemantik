@@ -44,8 +44,17 @@ class ProductsController extends Controller
     public function getAttributes(Request $request) {
         $category = Category::find($request->id);
         $attributes = $category->attributes()->get();
+        $characteristics = [];
 
-        return response()->json($attributes);
+        foreach ($attributes as $attr) {
+            $char = $attr->characteristics()->get();
+
+            if ($char != null) {
+                $characteristics[] = ['attr'=>$attr->id, 'items'=>$char];
+            }
+        }
+
+        return response()->json(['attributes'=>$attributes, 'characteristics'=>$characteristics]);
     }
 
     public function getAttributesValues(Request $request) {

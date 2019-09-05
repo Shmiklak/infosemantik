@@ -58,7 +58,7 @@
             width: 40px;
             height: 40px;
             margin-right: 15px;
-            padding: 4px 7px;
+            padding: 4px 7px;w
             color: #FFF;
             text-decoration: none;
             border: 1px solid #367fa9;
