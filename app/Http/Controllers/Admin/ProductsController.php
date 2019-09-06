@@ -198,9 +198,6 @@ class ProductsController extends Controller
 
     public function import(Request $request)
     {
-        Product::truncate();
-        DB::table('product_attributes')->truncate();
-
         Excel::import(new ProductsImport, request()->file('excel'));
         return redirect()->route('products.index')->with('message', 'База данных продуктов успешно обновлена');
     }

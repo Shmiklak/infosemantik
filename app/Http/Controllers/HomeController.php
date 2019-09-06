@@ -221,7 +221,6 @@ class HomeController extends Controller
     }
 
     public function filterCatalog(Request $request, $slug) {
-//        dd($request->all());
         if (empty($request->all())) {
             return redirect()->route('category', $slug);
         }
@@ -238,21 +237,34 @@ class HomeController extends Controller
         }
         $category = Category::where('slug', $slug)->first();
         array_push($ids, $category->id);
-
         $filterIds = [];
 
+        $temp = $request->filter;
+
         foreach ($request->filter as $key=>$item) {
-            $filterIds[] = DB::table('product_attributes')->where('attribute_id', $key)->where('value', $item)->pluck('product_id');
+            if (count($request->filter) == 1 && !is_array(reset($temp))) {
+                $temp = DB::table('product_attributes')->where('attribute_id', $key)->where('value', $item)->pluck('product_id')->toArray();
+                foreach ($temp as $id) {
+                    $filterIds[] = $id;
+                }
+            }
+        else {
+            foreach ($item as $key2=>$value) {
+                $temp = DB::table('product_attributes')->where('attribute_id', $key)->where('value', $value)->pluck('product_id')->toArray();
+                    foreach ($temp as $id) {
+                        $filterIds[] = $id;
+                    }
+                }
+            }
         }
 
         $attributes = Category::where('slug', $slug)->first()->attributes()->get();
 
-        $filterIdsUnique = array_unique($filterIds)[0];
+        $filterIdsUnique = array_unique($filterIds);
 
         if(count($filterIdsUnique) < 1) {
             return view('catalog.empty')->withCategory($category)->withAttributes($attributes);
         }
-
         if ($sort == 1) {
             $products = Product::whereIn('category_id', $ids)->whereIn('id', $filterIdsUnique)->orderBy('created_at', 'desc')->paginate(10);
         }
@@ -265,8 +277,6 @@ class HomeController extends Controller
         if ($sort == 4) {
             $products = Product::whereIn('category_id', $ids)->whereIn('id', $filterIdsUnique)->orderBy('title', 'desc')->paginate(10);
         }
-
-
 
         return view('catalog.index')->withCategory($category)->withProducts($products)->withSort($sort)->withAttributes($attributes);
     }

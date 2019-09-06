@@ -14,9 +14,7 @@
                         <a class="btn btn-primary" href="{{ route('products.create') }}">Добавить продукт</a>
                         <div class="btn-group pull-right">
                             <a href="{{ route('products.images') }}" class="btn btn-instagram"><i class="fa fa-image" style="margin-right: 5px;"></i> Изображения</a>
-                            <a href="{{ route('products.excel.empty') }}" class="btn btn-success"><i class="fa fa-table" style="margin-right: 5px;"></i> Шаблон для новых</a>
-                            <a href="#" class="btn btn-info" data-toggle="modal" data-target="#importModalNew"><i class="fa fa-upload" style="margin-right: 5px;"></i>Загрузить новые</a>
-                            <a href="{{ route('products.excel') }}" class="btn btn-warning"><i class="fa fa-table" style="margin-right: 5px;"></i>Шаблон всех продуктов</a>
+                            <a href="{{ route('products.excel') }}" class="btn btn-success"><i class="fa fa-table" style="margin-right: 5px;"></i>Получить таблицу продуктов</a>
                             <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#importModal"><i class="fa fa-upload" style="margin-right: 5px;"></i>Обновить базу</a>
                         </div>
                     </div>
@@ -77,30 +75,7 @@
                     <input type="file" name="excel" id="excel">
                     </div>
                     <div style="margin-top: 10px; display: flex; justify-content:center;">
-                        <button type="submit" class="btn btn-primary pull-left" style="margin-right: 10px;" onclick="return confirm('Вы уверены? Это действие удалит все продукты на сайте, и заменит на продукты из таблицы.')">
-                            Загрузить
-                        </button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-                    </div>
-                </form>
-            </div>
-
-        </div>
-    </div>
-
-    <div id="importModalNew" class="modal fade" role="dialog">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content" style="padding: 15px;">
-                <form class="import-form" method="POST" action="{{ route('products.import.new') }}" enctype="multipart/form-data">
-                    @csrf
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title" style="text-align: center">
-                        Загрузить таблицу</h4>
-                    <div style="padding: 15px; display: flex; justify-content: center;">
-                        <input type="file" name="excel" id="excel">
-                    </div>
-                    <div style="margin-top: 10px; display: flex; justify-content:center;">
-                        <button type="submit" class="btn btn-primary pull-left" style="margin-right: 10px;">
+                        <button type="submit" class="btn btn-primary pull-left" style="margin-right: 10px;" onclick="return confirm('Вы уверены?')">
                             Загрузить
                         </button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>

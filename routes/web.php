@@ -105,9 +105,9 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>'admin'], f
        Route::get('/{id}/edit', 'ProductsController@edit')->name('products.edit');
        Route::put('/{id}/update', 'ProductsController@update')->name('products.update');
        Route::get('/export', 'ProductsController@export')->name('products.excel');
-       Route::get('/export-empty', 'ProductsController@exportEmpty')->name('products.excel.empty');
+//       Route::get('/export-empty', 'ProductsController@exportEmpty')->name('products.excel.empty');
        Route::post('/import', 'ProductsController@import')->name('products.import');
-       Route::post('/import-new', 'ProductsController@importNew')->name('products.import.new');
+//       Route::post('/import-new', 'ProductsController@importNew')->name('products.import.new');
        Route::get('/images', 'ProductsController@images')->name('products.images');
        Route::post('/uploadImages', 'ProductsController@uploadImages')->name('products.upload_images');
        Route::post('/remove-image', 'ProductsController@removeImageFromProduct');

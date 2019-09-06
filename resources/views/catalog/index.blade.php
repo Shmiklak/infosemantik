@@ -60,14 +60,20 @@
                                                             <div class="filter__container">
                                                                 <div class="filter-list">
                                                                     <div class="filter-list__list">
-                                                                        @foreach($attr->characteristics()->get() as $item)
+                                                                        @foreach($attr->characteristics()->get() as $key=>$item)
                                                                         <label class="filter-list__item">
                                                                             <span class="filter-list__input input-check">
                                                                                 <span class="input-check__body">
-                                                                                     <input class="input-check__input" name="filter[{{ $attr->id }}]"
+                                                                                     <input class="input-check__input" name="filter[{{ $attr->id }}][{{ $key }}]"
                                                                                             value="{{ $item->value }}" type="checkbox"
                                                                                             @if(request()->get('filter') != null)
-                                                                                            @if(in_array($item->value, request()->get('filter'))) checked @endif @endif>
+                                                                                                @if(array_key_exists($attr->id, request()->get('filter')))
+{{--                                                                                                @dd(request()->get('filter')[$attr->id])--}}
+                                                                                                    @if($item->value == request()->get('filter')[$attr->id] || in_array($item->value, request()->get('filter')[$attr->id]))
+                                                                                                        checked
+                                                                                                    @endif
+                                                                                                @endif
+                                                                                            @endif>
                                                                                     <span class="input-check__box"></span>
                                                                                     <svg class="input-check__icon" width="9px" height="7px"><use xlink:href="/images/sprite.svg#check-9x7"></use></svg>
                                                                                 </span>
