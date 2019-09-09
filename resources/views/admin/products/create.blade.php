@@ -30,7 +30,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="title">Уникальный ключ</label>
-                                        <input type="text" class="form-control" id="custom_id" name="custom_id"
+                                        <input type="text" class="form-control" id="custom_id" name="custom_id" value="{{ old('custom_id') }}"
                                                required>
                                     </div>
                                     <div class="form-group">
@@ -174,30 +174,31 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="short_description">Краткое описание</label>
-                                        <textarea name="short_description" id="short_description"></textarea>
+                                        <textarea name="short_description" id="short_description">{{ old('short_description') }}</textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampldescriptioneInputEmail1">Главное описание</label>
-                                        <textarea name="description" id="description"></textarea>
+                                        <textarea name="description" id="description">{{ old('description') }}</textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Описание в каталоге</label>
                                         <textarea name="catalog_description"
-                                                  id="catalog_description"></textarea>
+                                                  id="catalog_description">{{ old('catalog_description') }}</textarea>
                                     </div>
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" name="is_available"> В наличии
+
+                                            <input type="checkbox" name="is_available" @if(old('is_available') != null) checked @endif> В наличии
                                         </label>
                                     </div>
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" name="is_recommended"> Рекомендованный продукт
+                                            <input type="checkbox" name="is_recommended" @if(old('is_recommended') != null) checked @endif> Рекомендованный продукт
                                         </label>
                                     </div>
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" name="is_bestseller"> Бестселлер
+                                            <input type="checkbox" name="is_bestseller" @if(old('is_bestseller') != null) checked @endif> Бестселлер
                                         </label>
                                     </div>
                                 </div>
@@ -208,7 +209,7 @@
                                                 name="category_id">
                                             <option disabled selected>Выберите категорию</option>
                                             @foreach($categories as $category)
-                                                <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                                <option value="{{ $category->id }}" @if(old('category_id') == $category->id) selected @endif>{{ $category->title }}</option>
                                             @endforeach
                                         </select>
                                     </div>
